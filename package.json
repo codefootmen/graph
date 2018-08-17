@@ -1,0 +1,36 @@
+{
+  "name": "graph",
+  "version": "1.0.0",
+  "description": "A graphs theory and algorithms implementation",
+  "main": "src/index.js",
+  "scripts": {
+    "watch": "webpack --watch",
+    "start": "webpack --watch & webpack-dev-server --open-page 'webpack-dev-server/index.html'",
+    "build": "webpack --config webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codefootmen/graph.git"
+  },
+  "keywords": [
+    "graph",
+    "algorithm"
+  ],
+  "author": "Flavio Barci, Filipe Jessé, Felipe Toshio e Jonathan Thomaz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codefootmen/graph/issues"
+  },
+  "homepage": "https://github.com/codefootmen/graph#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  }
+}
