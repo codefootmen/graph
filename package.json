@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/codefootmen/graph#readme",
   "dependencies": {
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "raphael": "^2.2.7"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
