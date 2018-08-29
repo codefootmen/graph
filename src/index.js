@@ -1,7 +1,8 @@
-import _ from 'lodash';
+import windowEvents from './view/windowEvents';
 
-console.log();
+windowEvents();
 
-let root = document.getElementById('root');
 
-root.appendChild(document.createTextNode(_.capitalize('hello World')));
+
+
+
