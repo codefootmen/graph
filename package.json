@@ -24,7 +24,9 @@
     "url": "https://github.com/codefootmen/graph/issues"
   },
   "homepage": "https://github.com/codefootmen/graph#readme",
-  "dependencies": {},
+  "dependencies": {
+    "raphael": "^2.2.7"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
