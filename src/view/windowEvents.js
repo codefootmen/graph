@@ -9,17 +9,20 @@ const WindowEvents = () => {
       console.log(values);
 
       document.getElementById("verticesCheckboxes").innerHTML = "";
+      if (document.getElementById("submit")){
+        document.getElementById("verticesCheckboxes").parentElement.removeChild(document.getElementById("submit"));
+      }
       let i;
       for (i = 0; i < values.vertices; i++) {
         document.getElementById("verticesCheckboxes").innerHTML += `
-      <label class="col s3">
+        <label class="col s3">
         <input type="checkbox" name="vertex-${i}" class="filled-in" />
         <span>${i}</span>
-      </label>
-    `;
+        </label>
+        `;
       }
 
-      document.getElementById("verticesCheckboxes").parentElement.innerHTML += '<button type="submit" class="waves-effect waves-light btn ">Create</button>';
+      document.getElementById("verticesCheckboxes").parentElement.innerHTML += '<button type="submit" id="submit" class="waves-effect waves-light btn ">Create</button>';
       return false;
     }
   });
