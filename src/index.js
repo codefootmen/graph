@@ -1,6 +1,10 @@
-import windowEvents from './view/windowEvents';
+import JsonGraph from './app/jsonGraph';
+import WindowEvents from './view/windowEvents';
+import ButtonEvents from './view/buttonEvents';
 
-windowEvents();
+
+WindowEvents();
+ButtonEvents();
 
 
 
