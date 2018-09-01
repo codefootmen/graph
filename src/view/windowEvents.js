@@ -13,12 +13,23 @@ const WindowEvents = () => {
         document.getElementById("verticesCheckboxes").parentElement.removeChild(document.getElementById("submit"));
       }
       let i;
+      document.getElementById("verticesCheckboxes").innerHTML += `
+      <div class="input-field col s3">
+      <select class="browser-default" id="select-a" name="select-a" form="createEdges">
+      </select>
+      </div>
+      <div class="input-field col s3">
+      <select class="browser-default" id="select-b" name="select-b" form="createEdges"">
+      </select>
+      </div>
+      `;
+
       for (i = 0; i < values.vertices; i++) {
-        document.getElementById("verticesCheckboxes").innerHTML += `
-        <label class="col s3">
-        <input type="checkbox" name="vertex-${i}" class="filled-in" />
-        <span>${i}</span>
-        </label>
+        document.getElementById("select-a").innerHTML += `
+        <option value="${i}" name="${i}">${i}</option>
+        `;
+        document.getElementById("select-b").innerHTML += `
+        <option value="${i}" name="${i}">${i}</option>
         `;
       }
 
