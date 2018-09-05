@@ -9,7 +9,7 @@ const WindowEvents = () => {
       window.graph.createVertices(Array.from({ length: values.vertices }, (v, k) => k));
       document.getElementById('verticesCheckboxes').innerHTML = '';
       if (document.getElementById('submit')) {
-        document.getElementById('verticesCheckboxes').parentElement.removeChild(document.getElementById("submit"));
+        document.getElementById('verticesCheckboxes').parentElement.removeChild(document.getElementById('submit'));
       }
       let i;
       document.getElementById('verticesCheckboxes').innerHTML += `
@@ -32,7 +32,7 @@ const WindowEvents = () => {
       }
       document.getElementById('verticesCheckboxes').parentElement.innerHTML += '<button type="submit" id="submit" class="waves-effect waves-light btn ">Create</button>';
       return false;
-    }
+    };
   });
   window.addEventListener('load', () => {
     document.getElementById('createEdges').onsubmit = e => {
