@@ -8,18 +8,22 @@
 </head>
 
 <body>
-  <div class="columns">
+  <div class="container is-fluid columns">
     <div class="column">
-      <h5>Vertices</h5>
+      <h3 class="title is-3">Vertices</h3>
       <form id="createVertices" autocomplete="off">
         <div class="input-field">
-          <input id="vertices" name="vertices" type="number" class="validate" value="6">
+          <input id="vertices" name="vertices" type="number" class="input is-primary" value="6">
         </div>
-        <button type="submit" class="waves-effect waves-light btn ">Create</button>
+        <div class="">
+          <button type="submit" class="button is-primary is-outlined">Create</>
+        </div>
       </form>
       <form id="createEdges">
-        <h5>Edges</h5>
-        <div id="verticesCheckboxes" class="columns">
+        <h3 class="title is-3">Edges</h3>
+        <div class="field">
+          <div id="verticesCheckboxes" class="control">
+          </div>
         </div>
       </form>
     </div>
@@ -27,7 +31,7 @@
       <div class="columns">
         <div class="column">
         </br>
-          <button id="show-graph" class="waves-effect waves-light btn">SHOW ADJACENCY MATRIX</button>
+          <button id="show-graph" class="button is-primary is-outlined">SHOW ADJACENCY MATRIX</button>
           <div class="columns">
             <div id="canvas" class="column">
             </div>

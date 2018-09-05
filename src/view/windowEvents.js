@@ -13,12 +13,12 @@ const WindowEvents = () => {
       }
       let i;
       document.getElementById('verticesCheckboxes').innerHTML += `
-      <div class="input-field column">
-        <select class="browser-default" id="select-a" name="select-a" form="createEdges">
+      <div class="select is-success is-medium">
+        <select id="select-a" name="select-a" form="createEdges">
         </select>
       </div>
-      <div class="input-field column">
-        <select class="browser-default" id="select-b" name="select-b" form="createEdges"">
+      <div class="select is-success is-medium">
+        <select id="select-b" name="select-b" form="createEdges"">
         </select>
       </div>
       `;
@@ -30,7 +30,7 @@ const WindowEvents = () => {
         <option value="${i}" name="${i}">${i}</option>
         `;
       }
-      document.getElementById('verticesCheckboxes').parentElement.innerHTML += '<button type="submit" id="submit" class="waves-effect waves-light btn ">Create</button>';
+      document.getElementById('verticesCheckboxes').parentElement.innerHTML += '<button type="submit" id="submit" class="button is-primary is-outlined">Create</button>';
       return false;
     }
   });
