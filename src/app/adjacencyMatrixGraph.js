@@ -4,7 +4,6 @@ class AdjacencyMatrixGraph {
   constructor() {
 
   }
-
   create(json) {
     const graph = new Matrix().create(json.vertices.length);
     json.edges.forEach((edge) => {
