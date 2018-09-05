@@ -1,7 +1,14 @@
-import _ from 'lodash';
+import JsonGraph from './app/jsonGraph';
+import WindowEvents from './view/windowEvents';
+import ButtonEvents from './view/buttonEvents';
 
-console.log();
+let graph = new JsonGraph();
+window.graph = graph;
 
-let root = document.getElementById('root');
+WindowEvents();
+ButtonEvents();
 
-root.appendChild(document.createTextNode(_.capitalize('hello World')));
+
+
+
+
