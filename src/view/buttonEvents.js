@@ -6,16 +6,9 @@ const ButtonEvents = () => {
     let adjM = matrix.create(window.graph);
     console.log(adjM);
     let print = '</br>';
-    for (let i = 0; i < adjM.length; i++) {
-      for (let j = 0; j < adjM.length; j++) {
-        if (j == (adjM.length - 1)) {
-          print += adjM[i][j] + '</br>';
-        } else {
-          print += adjM[i][j] + '&nbsp - &nbsp';
-        }
-      }
-    }
-
+    adjM.forEach(x => {
+      x.forEach((y, j) => print += (j != x.length - 1) ? y + '&nbsp - &nbsp' : y + '</br>');
+    });
     document.getElementById('canvas').innerHTML = print;
   });
 };
