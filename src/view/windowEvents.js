@@ -13,11 +13,11 @@ const WindowEvents = () => {
       }
       let i;
       document.getElementById('verticesCheckboxes').innerHTML += `
-      <div class="input-field col s3">
+      <div class="input-field column">
         <select class="browser-default" id="select-a" name="select-a" form="createEdges">
         </select>
       </div>
-      <div class="input-field col s3">
+      <div class="input-field column">
         <select class="browser-default" id="select-b" name="select-b" form="createEdges"">
         </select>
       </div>
