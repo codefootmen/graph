@@ -10,10 +10,8 @@ const WindowEvents = (graphEvent) => {
       if (values.vertex.trim() === '') {
         return false;
       } else {
-        graphEvent.emit('addVertice', values);
         console.log(values);
-        window.graph.createVertices(Array.from({ length: values.vertices }, (v, k) => k));
-        
+        graphEvent.emit('addVertex', values);
         document.getElementById('verticesCheckboxes').innerHTML = '';
         if (document.getElementById('submit')) {
           document.getElementById('verticesCheckboxes').parentElement.removeChild(document.getElementById('submit'));
@@ -29,12 +27,12 @@ const WindowEvents = (graphEvent) => {
         </select>
         </div>
         `;
-        for (i = 0; i < values.vertices; i++) {
+        for (i = 0; i < window.graph.vertices.length; i++) {
           document.getElementById('select-a').innerHTML += `
-          <option value="${i}" name="${i}">${i}</option>
+          <option value="${window.graph.vertices[i]}" name="${window.graph.vertices[i]}">${window.graph.vertices[i]}</option>
           `;
           document.getElementById('select-b').innerHTML += `
-          <option value="${i}" name="${i}">${i}</option>
+          <option value="${window.graph.vertices[i]}" name="${window.graph.vertices[i]}">${window.graph.vertices[i]}</option>
           `;
         }
         document.getElementById('verticesCheckboxes').parentElement.innerHTML += '<button type="submit" id="submit" class="button is-primary is-outlined">Create</button>';
@@ -48,11 +46,12 @@ const WindowEvents = (graphEvent) => {
       const formData = new FormData(e.target);
       let values = {};
       Array.from(formData.entries()).forEach(x => values[x[0]] = x[1]);
-      let edges = [];
+      let edge = [];
       for (let key in values) {
-        edges.push(values[key]);
+        edge.push(values[key]);
       }
-      window.graph.addEdge(edges);
+      console.log(edge);
+      window.graph.addEdge({ 'edge': edge });
       console.log(window.graph);
       return false;
     };
