@@ -1,11 +1,10 @@
-import JsonGraph from './app/jsonGraph';
 import initViewEvents from './view';
+import Graph from './app/graph';
 
-let graph = new JsonGraph();
-window.graph = graph;
-if (localStorage.getItem('graph') === null){
-  localStorage.setItem('vertices', ['a']);
-  localStorage.setItem('graph', ['a']);
+if (!window.graph){
+  let graph = new Graph([], []);
+  window.graph = graph;
+  console.log('window created', window.graph);
 }
 
 initViewEvents();
