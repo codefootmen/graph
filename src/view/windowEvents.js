@@ -13,11 +13,11 @@ const WindowEvents = () => {
       }
       let i;
       document.getElementById('verticesCheckboxes').innerHTML += `
-      <div class="select is-success is-medium">
+      <div class="select is-success">
         <select id="select-a" name="select-a" form="createEdges">
         </select>
       </div>
-      <div class="select is-success is-medium">
+      <div class="select is-success">
         <select id="select-b" name="select-b" form="createEdges"">
         </select>
       </div>
@@ -30,7 +30,7 @@ const WindowEvents = () => {
         <option value="${i}" name="${i}">${i}</option>
         `;
       }
-      document.getElementById('verticesCheckboxes').parentElement.innerHTML += '<button type="submit" id="submit" class="button is-primary is-outlined">Create</button>';
+      document.getElementById('verticesCheckboxes').parentElement.innerHTML += '</br><button type="submit" id="submit" class="button is-primary is-outlined">Create</button>';
       return false;
     };
   });
