@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/codefootmen/graph#readme",
   "dependencies": {
+    "events": "^3.0.0",
     "raphael": "^2.2.7"
   },
   "devDependencies": {

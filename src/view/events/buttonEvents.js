@@ -1,4 +1,4 @@
-import amg from '../app/adjacencyMatrixGraph';
+import amg from '../../app/adjacencyMatrixGraph';
 const ButtonEvents = () => {
   document.getElementById('show-graph').addEventListener('click', (e) => {
     e.preventDefault();
