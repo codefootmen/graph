@@ -2,7 +2,7 @@ import Matrix from './utils/matrix';
 
 class Graph {
   constructor(adjacencyMatrix, vertices) {
-    this.adjacencyMatrix = adjacencyMatrix;
+    this.adjacencyMatrix = new Matrix().create(0);
     this.vertices = vertices;
     this.edges = [];
   }
@@ -18,6 +18,8 @@ class Graph {
   }
   addVertex({ vertex }) {
     this.vertices.push(vertex);
+    this.adjacencyMatrix = this.adjacencyMatrix.map(x => { x.push(0); return x; });
+    this.adjacencyMatrix.push(Array(this.adjacencyMatrix.length + 1).fill(0));
   }
   addEdge({ edge }) {
     this.edges.push(edge);
