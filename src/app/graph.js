@@ -23,8 +23,9 @@ class Graph {
   }
   addEdge({ edge }) {
     this.edges.push(edge);
-
+    const firstVertexPosition = this.vertices.findIndex(value => value === edge[0]);
+    const secondVertexPosition = this.vertices.findIndex(value => value === edge[1]);
+    this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] += 1;
   }
-
 }
 export default Graph;
