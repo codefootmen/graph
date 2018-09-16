@@ -8,34 +8,54 @@
 </head>
 
 <body>
-  <div class="container is-fluid columns">
-    <div class="field column">
-      <h3 class="title is-3">Vertices</h3>
-      <form id="createVertices" autocomplete="off">
-        <div class="control">
-          <input id="vertices" name="vertex" type="text" class="input is-primary" style="width: 25%;" placeholder="Vertex">
-        </div>
-        </br>
-        <div class="control">
-          <button type="submit" class="button is-primary is-outlined">Create</button>
-        </div>
-      </form>
-      </br>
-      <form id="createEdges">
-        <h3 class="title is-3">Edges</h3>
+  <div class="container is-fluid">
+    <div class="columns">
+      <div class="column is-3">
         <div class="field">
-          <div id="verticesCheckboxes" class="control">
-          </div>
+          <form id="createVertices" autocomplete="off">
+            <div class="field">
+              <label class="label">Vertex</label>
+              <div class="control">
+                <input name="vertex" class="input" type="text" placeholder="Text input">
+              </div>
+            </div>
+            <div class="control">
+              <button type="submit" class="button is-link">Create</button>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
-    <div class="column">
-      <div class="columns">
-        <div class="column">
-          </br>
-          <button id="show-graph" class="button is-primary is-outlined">SHOW ADJACENCY MATRIX</button>
-          <div class="columns">
-            <div id="canvas" class="column">
+        <div class="field">
+          <form id="createEdges">
+            <div class="field">
+              <label class="label">Edge</label>
+              <div id="verticesCheckboxes" class="control">
+                <div class="select">
+                  <select id="select-a" name="select-a">
+                  </select>
+                </div>
+                <div class="select">
+                  <select id="select-b" name="select-b">
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button id="createEdgesSubmitButton" type="submit" class="button is-link" disabled>Create</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="control">
+          <button id="show-graph" class="button is-link">SHOW ADJACENCY MATRIX</button>
+        </div>
+      </div>
+      <div class="column">
+        <div class="columns">
+          <div class="column">
+            <div class="columns">
+              <div id="canvas" class="column">
+              </div>
             </div>
           </div>
         </div>

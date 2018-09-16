@@ -1,10 +1,11 @@
 import ButtonEvents from './buttonEvents';
 import WindowEvents from './windowEvents';
 import graphEvents from '../../app/events';
+import viewEvents from './viewEvents';
 
-const init = ()=>{
+const init = () => {
   ButtonEvents();
-  WindowEvents(graphEvents);
+  WindowEvents(graphEvents, viewEvents);
 };
 
 export default init;
