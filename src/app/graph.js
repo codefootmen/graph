@@ -30,7 +30,11 @@ class Graph {
     const secondVertexPosition = this.vertices.findIndex(value => value === edge[1]);
     this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] += 1;
   }
+  getInDegree({ vertex }) {
     let degree = 0;
+    const vertexIndex = this.vertices.findIndex(value => value === vertex);
+    this.adjacencyMatrix.forEach((row) =>{
+      degree += row[vertexIndex];
     });
     return degree;
   }
