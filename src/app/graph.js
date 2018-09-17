@@ -17,6 +17,9 @@ class Graph {
     return this.adjacencyMatrix;
   }
   addVertex({ vertex }) {
+    if(this.vertices.indexOf(vertex) > -1){
+      return false;
+    };
     this.vertices.push(vertex);
     this.adjacencyMatrix = this.adjacencyMatrix.map(x => { x.push(0); return x; });
     this.adjacencyMatrix.push(Array(this.adjacencyMatrix.length + 1).fill(0));
