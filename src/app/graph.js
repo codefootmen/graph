@@ -38,6 +38,11 @@ class Graph {
     });
     return degree;
   }
+  getOutDegree({ vertex }) {
+    const vertexIndex = this.vertices.findIndex(value => value === vertex);
+    let degree = this.adjacencyMatrix[vertexIndex].reduce((acc, el) => acc + el);
+    return degree;
+  }
   getOrder() {
     let order = 0;
     this.adjacencyMatrix.forEach((row) => {
