@@ -27,5 +27,12 @@ class Graph {
     const secondVertexPosition = this.vertices.findIndex(value => value === edge[1]);
     this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] += 1;
   }
+  getOrder(){
+    let degree = 0;
+    this.adjacencyMatrix.forEach((row) => {
+      degree += row.reduce((acc, el) => acc+el);
+    });
+    return degree;
+  }
 }
 export default Graph;
