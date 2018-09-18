@@ -13,9 +13,8 @@ const WindowEvents = (graphEvent, viewEvent) => {
       } else {
         console.log(values);
         graphEvent.emit('addVertex', values);
+        viewEvent.emit('populateSelect');
         viewEvent.emit('enableEdgesInput');
-        viewEvent.emit('populateInDegreeSelect');
-        viewEvent.emit('populateOutDegreeSelect');
         viewEvent.emit('enableDeleteVertexInput');
       }
     };
@@ -37,23 +36,22 @@ const WindowEvents = (graphEvent, viewEvent) => {
     };
   });
 
-
-  document.addEventListener('DOMContentLoaded',function() {
-    document.querySelector('select[id="selectInDegree"]').onchange=changeInDegreeEvent;
-  },false);
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('select[id="selectInDegree"]').onchange = changeInDegreeEvent;
+  }, false);
 
   function changeInDegreeEvent(event) {
-    if(!event.target.value) alert('Please Select One');
-    else document.getElementById('inDegree').innerHTML = window.graph.getInDegree({vertex: event.target.value});
+    if (!event.target.value) alert('Please Select One');
+    else document.getElementById('inDegree').innerHTML = window.graph.getInDegree({ vertex: event.target.value });
   }
 
-  document.addEventListener('DOMContentLoaded',function() {
-    document.querySelector('select[id="selectOutDegree"]').onchange=changeOutDegreeEvent;
-  },false);
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('select[id="selectOutDegree"]').onchange = changeOutDegreeEvent;
+  }, false);
 
   function changeOutDegreeEvent(event) {
-    if(!event.target.value) alert('Please Select One');
-    else document.getElementById('outDegree').innerHTML = window.graph.getOutDegree({vertex: event.target.value});
+    if (!event.target.value) alert('Please Select One');
+    else document.getElementById('outDegree').innerHTML = window.graph.getOutDegree({ vertex: event.target.value });
   }
   window.addEventListener('load', () => {
     document.getElementById('deleteVertex').onsubmit = e => {
@@ -69,7 +67,7 @@ const WindowEvents = (graphEvent, viewEvent) => {
         return false;
       } else {
         graphEvent.emit('deleteVertex', values);
-        viewEvent.emit('');
+        viewEvent.emit('populateSelect');
       }
     };
   });

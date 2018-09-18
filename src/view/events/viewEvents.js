@@ -2,14 +2,11 @@ import EventEmmiter from 'events';
 
 const viewEvent = new EventEmmiter();
 
-viewEvent.on('enableEdgesInput', () => {
-  const form = document.getElementById('createEdges');
-  const button = document.getElementById('createEdgesSubmitButton');
-  const selects = form.querySelectorAll('select');
+viewEvent.on('populateSelect', () => {
+  const selects = document.querySelectorAll('.select-vertex');
   console.log(selects);
-
   selects.forEach((item, i) => {
-    selects[i].options.length = 0;
+    selects[i].options.length = 1;
     window.graph.vertices.forEach((item) => {
       let option = document.createElement('option');
       option.name = item;
@@ -18,58 +15,16 @@ viewEvent.on('enableEdgesInput', () => {
       selects[i].add(option);
     });
   });
-
-  button.disabled = false;
-
 });
 
-viewEvent.on('populateInDegreeSelect', () => {
-  const divInDegree = document.getElementById('calcInDegree');
-  const selects = divInDegree.querySelectorAll('select');
-  console.log(selects);
-  selects.forEach((item, i) => {
-    selects[i].options.length = 0;
-    window.graph.vertices.forEach((item) => {
-      let option = document.createElement('option');
-      option.name = item;
-      option.text = item;
-      option.value = item;
-      selects[i].add(option);
-    });
-  });
+viewEvent.on('enableEdgesInput', () => {
+  const button = document.getElementById('createEdgesSubmitButton');
+  button.disabled = false;
 });
 
 viewEvent.on('enableDeleteVertexInput', () => {
-  const form = document.getElementById('deleteVertex');
   const button = document.getElementById('deleteVertexSubmitButton');
-  const selects = form.querySelectorAll('select');
-  selects.forEach((item, i) => {
-    selects[i].options.length = 0;
-    window.graph.vertices.forEach((item) => {
-      let option = document.createElement('option');
-      option.name = item;
-      option.text = item;
-      option.value = item;
-      selects[i].add(option);
-    });
-  });
   button.disabled = false;
-});
-
-viewEvent.on('populateOutDegreeSelect', () => {
-  const divOutDegree = document.getElementById('calcOutDegree');
-  const selects = divOutDegree.querySelectorAll('select');
-  console.log(selects);
-  selects.forEach((item, i) => {
-    selects[i].options.length = 0;
-    window.graph.vertices.forEach((item) => {
-      let option = document.createElement('option');
-      option.name = item;
-      option.text = item;
-      option.value = item;
-      selects[i].add(option);
-    });
-  });
 });
 
 export default viewEvent;
