@@ -22,11 +22,12 @@ viewEvent.on('populateSelectEdge', () => {
   console.log(selects);
   selects.forEach((item, i) => {
     selects[i].options.length = 1;
-    window.graph.vertices.forEach((item) => {
+    window.graph.edges.forEach((item) => {
+      console.log(item);
       let option = document.createElement('option');
-      option.name = item;
-      option.text = item;
-      option.value = item;
+      option.name = item.toString();
+      option.text = item.toString();
+      option.value = item.toString();
       selects[i].add(option);
     });
   });
@@ -39,6 +40,10 @@ viewEvent.on('enableEdgesInput', () => {
 
 viewEvent.on('enableDeleteVertexInput', () => {
   const button = document.getElementById('deleteVertexSubmitButton');
+  button.disabled = false;
+});
+viewEvent.on('enableDeleteEdgeInput', () => {
+  const button = document.getElementById('deleteEdgeSubmitButton');
   button.disabled = false;
 });
 

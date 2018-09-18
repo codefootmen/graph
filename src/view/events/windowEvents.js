@@ -30,7 +30,12 @@ const WindowEvents = (graphEvent, viewEvent) => {
         edge.push(values[key]);
       }
       console.log(edge);
+      if(edge[0] === '' || edge[1] === ''){
+        return false;
+      }
       window.graph.addEdge({ 'edge': edge });
+      viewEvent.emit('populateSelectEdge');
+      viewEvent.emit('enableDeleteEdgeInput');
       console.log(window.graph);
       return false;
     };
@@ -71,6 +76,30 @@ const WindowEvents = (graphEvent, viewEvent) => {
       }
     };
   });
+
+  window.addEventListener('load', () => {
+    document.getElementById('deleteEdge').onsubmit = e => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      console.log(Array.from(formData.entries()));
+      let values = {
+        edge: ''
+      };
+      Array.from(formData.entries()).forEach(x => values['edge'] = x[1].trim());
+      console.log(values);
+
+      if (values.edge[0] === '' || values.edge[1] === '') {
+        console.error('Empty Input');
+        return false;
+      } else {
+        values = values.edge.split(',');
+        console.log(values);
+        graphEvent.emit('deleteEdge', values);
+        viewEvent.emit('populateSelectEdge');
+      }
+    };
+  });
+
 
 };
 

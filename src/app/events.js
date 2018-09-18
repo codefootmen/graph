@@ -10,5 +10,8 @@ graphEvent.on('deleteVertex', (vertex)=>{
   window.graph.delVertex(vertex);
   console.log('vertex deleted', window.graph);
 });
-
+graphEvent.on('deleteEdge', (edge)=>{
+  window.graph.delEdge({'edge': edge});
+  console.log('Edge deleted', window.graph);
+});
 export default graphEvent;

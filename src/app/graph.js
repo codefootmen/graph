@@ -25,9 +25,13 @@ class Graph {
     this.adjacencyMatrix.push(Array(this.adjacencyMatrix.length + 1).fill(0));
   }
   addEdge({ edge }) {
+    if(edge[0] === '' || edge[1] === ''){
+      return false;
+    }
     this.edges.push(edge);
     const firstVertexPosition = this.vertices.findIndex(value => value === edge[0]);
     const secondVertexPosition = this.vertices.findIndex(value => value === edge[1]);
+
     this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] += 1;
   }
   delVertex({ vertex }) {
@@ -47,6 +51,7 @@ class Graph {
     if (this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] == 0) {
       return false;
     }
+    this.edges.splice(this.edges.findIndex(value => value === edge), 1);
     this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] -= 1;
   }
 

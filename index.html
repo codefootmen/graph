@@ -69,6 +69,25 @@
           </form>
         </div>
         <div class="field">
+          <form id="deleteEdge">
+            <div class="field">
+              <label class="label">Delete Edge</label>
+              <div id="edges-delete" class="control">
+                <div class="select">
+                  <select id="select-edge-to-delete" name="select-to-delete" class="select-edge">
+                    <option value="" hidden>Select</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button id="deleteEdgeSubmitButton" type="submit" class="button is-link" disabled>Delete</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="field">
           <div class="control">
             <button id="show-graph" class="button is-link">SHOW ADJACENCY MATRIX</button>
           </div>
