@@ -8,6 +8,8 @@ const ButtonEvents = () => {
       x.forEach((y, j) => print += (j != x.length - 1) ? y + '&nbsp - &nbsp' : y + '</br>');
     });
     document.getElementById('canvas').innerHTML = print;
+
+    document.getElementById('order').innerHTML = window.graph.getOrder();
   });
 };
 
