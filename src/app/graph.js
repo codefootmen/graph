@@ -17,9 +17,9 @@ class Graph {
     return this.adjacencyMatrix;
   }
   addVertex({ vertex }) {
-    if(this.vertices.indexOf(vertex) > -1){
+    if (this.vertices.indexOf(vertex) > -1) {
       return false;
-    };
+    }
     this.vertices.push(vertex);
     this.adjacencyMatrix = this.adjacencyMatrix.map(x => { x.push(0); return x; });
     this.adjacencyMatrix.push(Array(this.adjacencyMatrix.length + 1).fill(0));
@@ -30,14 +30,20 @@ class Graph {
     const secondVertexPosition = this.vertices.findIndex(value => value === edge[1]);
     this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] += 1;
   }
-  delVertex({vertex}){
-    this.vertices.splice(vertex);
-    this.adjacencyMatrix.splice(vertex);
+  delVertex({ vertex }) {
+    const index = this.vertices.indexOf(vertex);
+    if (index > -1) {
+      this.vertices.splice(index, 1);
+      this.adjacencyMatrix.splice(index, 1);
+      this.adjacencyMatrix.forEach(row => {
+        row.splice(index, 1);
+      });
+    }
   }
-  delEdge({edge}){
+  delEdge({ edge }) {
     const firstVertexPosition = this.vertices.findIndex(value => value === edge[0]);
     const secondVertexPosition = this.vertices.findIndex(value => value === edge[1]);
-    if (this.adjacencyMatrix[firstVertexPosition][secondVertexPosition].value === 0){
+    if (this.adjacencyMatrix[firstVertexPosition][secondVertexPosition].value === 0) {
       return false;
     }
     this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] += -1;
@@ -45,7 +51,7 @@ class Graph {
   getInDegree({ vertex }) {
     let degree = 0;
     const vertexIndex = this.vertices.findIndex(value => value === vertex);
-    this.adjacencyMatrix.forEach((row) =>{
+    this.adjacencyMatrix.forEach((row) => {
       degree += row[vertexIndex];
     });
     return degree;

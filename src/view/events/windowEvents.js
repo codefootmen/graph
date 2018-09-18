@@ -14,6 +14,7 @@ const WindowEvents = (graphEvent, viewEvent) => {
         console.log(values);
         graphEvent.emit('addVertex', values);
         viewEvent.emit('enableEdgesInput');
+        viewEvent.emit('enableDeleteVertexInput');
       }
     };
   });
@@ -33,6 +34,25 @@ const WindowEvents = (graphEvent, viewEvent) => {
       return false;
     };
   });
+  window.addEventListener('load', () => {
+    document.getElementById('deleteVertex').onsubmit = e => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      console.log(Array.from(formData.entries()));
+      let values = {
+        vertex: ''
+      };
+      Array.from(formData.entries()).forEach(x => values['vertex'] = x[1].trim());
+      if (values.vertex.trim() === '') {
+        console.error('Empty Input');
+        return false;
+      } else {
+        graphEvent.emit('deleteVertex', values);
+        viewEvent.emit('');
+      }
+    };
+  });
+
 };
 
 export default WindowEvents;
