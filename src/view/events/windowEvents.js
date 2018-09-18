@@ -15,6 +15,7 @@ const WindowEvents = (graphEvent, viewEvent) => {
         graphEvent.emit('addVertex', values);
         viewEvent.emit('enableEdgesInput');
         viewEvent.emit('populateInDegreeSelect');
+        viewEvent.emit('populateOutDegreeSelect');
       }
     };
   });

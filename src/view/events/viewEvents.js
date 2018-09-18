@@ -39,4 +39,21 @@ viewEvent.on('populateInDegreeSelect', () => {
     });
   });
 });
+
+viewEvent.on('populateOutDegreeSelect', () => {
+  const divOutDegree = document.getElementById('calcOutDegree');
+  const selects = divOutDegree.querySelectorAll('select');
+  console.log(selects);
+  selects.forEach((item, i) => {
+    selects[i].options.length = 0;
+    window.graph.vertices.forEach((item) => {
+      let option = document.createElement('option');
+      option.name = item;
+      option.text = item;
+      option.value = item;
+      selects[i].add(option);
+    });
+  });
+});
+
 export default viewEvent;
