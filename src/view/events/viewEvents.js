@@ -17,6 +17,21 @@ viewEvent.on('populateSelect', () => {
   });
 });
 
+viewEvent.on('populateSelectEdge', () => {
+  const selects = document.querySelectorAll('.select-edge');
+  console.log(selects);
+  selects.forEach((item, i) => {
+    selects[i].options.length = 1;
+    window.graph.vertices.forEach((item) => {
+      let option = document.createElement('option');
+      option.name = item;
+      option.text = item;
+      option.value = item;
+      selects[i].add(option);
+    });
+  });
+});
+
 viewEvent.on('enableEdgesInput', () => {
   const button = document.getElementById('createEdgesSubmitButton');
   button.disabled = false;
