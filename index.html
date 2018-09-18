@@ -31,11 +31,13 @@
               <label class="label">Edge</label>
               <div id="verticesCheckboxes" class="control">
                 <div class="select">
-                  <select id="select-a" name="select-a">
+                  <select id="select-a" name="select-a" class="select-vertex">
+                    <option value="" hidden>Select</option>
                   </select>
                 </div>
                 <div class="select">
-                  <select id="select-b" name="select-b">
+                  <select id="select-b" name="select-b" class="select-vertex">
+                    <option value="" hidden>Select</option>
                   </select>
                 </div>
               </div>
@@ -53,7 +55,8 @@
               <label class="label">Delete Vertex</label>
               <div id="vertices-delete" class="control">
                 <div class="select">
-                  <select id="select-to-delete" name="select-to-delete">
+                  <select id="select-to-delete" name="select-to-delete" class="select-vertex">
+                      <option value="" hidden>Select</option>
                   </select>
                 </div>
               </div>
@@ -90,8 +93,8 @@
         </p>
         <div id="calcInDegree" class="control">
           <div class="select">
-            <select id="selectInDegree" name="select-c">
-                <option hidden>Select</option>
+            <select id="selectInDegree" name="select-c" class="select-vertex">
+              <option hidden>Select</option>
             </select>
           </div>
         </div>
@@ -103,7 +106,7 @@
         </p>
         <div id="calcOutDegree" class="control">
           <div class="select">
-            <select id="selectOutDegree" name="select-d">
+            <select id="selectOutDegree" name="select-d" class="select-vertex">
               <option hidden>Select</option>
             </select>
           </div>
