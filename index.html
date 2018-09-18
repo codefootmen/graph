@@ -47,8 +47,28 @@
             </div>
           </form>
         </div>
-        <div class="control">
-          <button id="show-graph" class="button is-link">SHOW ADJACENCY MATRIX</button>
+        <div class="field">
+          <form id="deleteVertex">
+            <div class="field">
+              <label class="label">Delete Vertex</label>
+              <div id="vertices-delete" class="control">
+                <div class="select">
+                  <select id="select-to-delete" name="select-to-delete">
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button id="deleteVertexSubmitButton" type="submit" class="button is-link" disabled>Delete</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="field">
+          <div class="control">
+            <button id="show-graph" class="button is-link">SHOW ADJACENCY MATRIX</button>
+          </div>
         </div>
       </div>
       <div id="canvas" class="column">

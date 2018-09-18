@@ -16,6 +16,7 @@ const WindowEvents = (graphEvent, viewEvent) => {
         viewEvent.emit('enableEdgesInput');
         viewEvent.emit('populateInDegreeSelect');
         viewEvent.emit('populateOutDegreeSelect');
+        viewEvent.emit('enableDeleteVertexInput');
       }
     };
   });
@@ -54,6 +55,25 @@ const WindowEvents = (graphEvent, viewEvent) => {
     if(!event.target.value) alert('Please Select One');
     else document.getElementById('outDegree').innerHTML = window.graph.getOutDegree({vertex: event.target.value});
   }
+  window.addEventListener('load', () => {
+    document.getElementById('deleteVertex').onsubmit = e => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      console.log(Array.from(formData.entries()));
+      let values = {
+        vertex: ''
+      };
+      Array.from(formData.entries()).forEach(x => values['vertex'] = x[1].trim());
+      if (values.vertex.trim() === '') {
+        console.error('Empty Input');
+        return false;
+      } else {
+        graphEvent.emit('deleteVertex', values);
+        viewEvent.emit('');
+      }
+    };
+  });
+
 };
 
 export default WindowEvents;

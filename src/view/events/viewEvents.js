@@ -27,7 +27,6 @@ viewEvent.on('populateInDegreeSelect', () => {
   const divInDegree = document.getElementById('calcInDegree');
   const selects = divInDegree.querySelectorAll('select');
   console.log(selects);
-
   selects.forEach((item, i) => {
     selects[i].options.length = 0;
     window.graph.vertices.forEach((item) => {
@@ -38,6 +37,23 @@ viewEvent.on('populateInDegreeSelect', () => {
       selects[i].add(option);
     });
   });
+});
+
+viewEvent.on('enableDeleteVertexInput', () => {
+  const form = document.getElementById('deleteVertex');
+  const button = document.getElementById('deleteVertexSubmitButton');
+  const selects = form.querySelectorAll('select');
+  selects.forEach((item, i) => {
+    selects[i].options.length = 0;
+    window.graph.vertices.forEach((item) => {
+      let option = document.createElement('option');
+      option.name = item;
+      option.text = item;
+      option.value = item;
+      selects[i].add(option);
+    });
+  });
+  button.disabled = false;
 });
 
 viewEvent.on('populateOutDegreeSelect', () => {
