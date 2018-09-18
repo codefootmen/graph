@@ -35,6 +35,25 @@ const WindowEvents = (graphEvent, viewEvent) => {
       return false;
     };
   });
+
+
+  document.addEventListener('DOMContentLoaded',function() {
+    document.querySelector('select[id="selectInDegree"]').onchange=changeInDegreeEvent;
+  },false);
+
+  function changeInDegreeEvent(event) {
+    if(!event.target.value) alert('Please Select One');
+    else document.getElementById('inDegree').innerHTML = window.graph.getInDegree({vertex: event.target.value});
+  }
+
+  document.addEventListener('DOMContentLoaded',function() {
+    document.querySelector('select[id="selectOutDegree"]').onchange=changeOutDegreeEvent;
+  },false);
+
+  function changeOutDegreeEvent(event) {
+    if(!event.target.value) alert('Please Select One');
+    else document.getElementById('outDegree').innerHTML = window.graph.getOutDegree({vertex: event.target.value});
+  }
 };
 
 export default WindowEvents;
