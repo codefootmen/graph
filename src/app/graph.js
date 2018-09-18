@@ -40,14 +40,16 @@ class Graph {
       });
     }
   }
+
   delEdge({ edge }) {
     const firstVertexPosition = this.vertices.findIndex(value => value === edge[0]);
     const secondVertexPosition = this.vertices.findIndex(value => value === edge[1]);
-    if (this.adjacencyMatrix[firstVertexPosition][secondVertexPosition].value === 0) {
+    if (this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] == 0) {
       return false;
     }
-    this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] += -1;
+    this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] -= 1;
   }
+
   getInDegree({ vertex }) {
     let degree = 0;
     const vertexIndex = this.vertices.findIndex(value => value === vertex);
