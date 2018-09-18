@@ -30,6 +30,18 @@ class Graph {
     const secondVertexPosition = this.vertices.findIndex(value => value === edge[1]);
     this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] += 1;
   }
+  delVertex({vertex}){
+    this.vertices.splice(vertex);
+    this.adjacencyMatrix.splice(vertex);
+  }
+  delEdge({edge}){
+    const firstVertexPosition = this.vertices.findIndex(value => value === edge[0]);
+    const secondVertexPosition = this.vertices.findIndex(value => value === edge[1]);
+    if (this.adjacencyMatrix[firstVertexPosition][secondVertexPosition].value === 0){
+      return false;
+    }
+    this.adjacencyMatrix[firstVertexPosition][secondVertexPosition] += -1;
+  }
   getInDegree({ vertex }) {
     let degree = 0;
     const vertexIndex = this.vertices.findIndex(value => value === vertex);
