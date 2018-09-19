@@ -73,6 +73,7 @@ const WindowEvents = (graphEvent, viewEvent) => {
       } else {
         graphEvent.emit('deleteVertex', values);
         viewEvent.emit('populateSelect');
+        viewEvent.emit('populateSelectEdge');
       }
     };
   });

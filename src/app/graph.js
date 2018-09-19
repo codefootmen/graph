@@ -25,7 +25,7 @@ class Graph {
     this.adjacencyMatrix.push(Array(this.adjacencyMatrix.length + 1).fill(0));
   }
   addEdge({ edge }) {
-    if(edge[0] === '' || edge[1] === ''){
+    if (edge[0] === '' || edge[1] === '') {
       return false;
     }
     this.edges.push(edge);
@@ -38,6 +38,11 @@ class Graph {
     const index = this.vertices.indexOf(vertex);
     if (index > -1) {
       this.vertices.splice(index, 1);
+      this.edges.forEach(edge => {
+        if (edge[0] === vertex || edge[1] === vertex) {
+          this.edges.splice(this.edges.indexOf(edge), 1);
+        }
+      });
       this.adjacencyMatrix.splice(index, 1);
       this.adjacencyMatrix.forEach(row => {
         row.splice(index, 1);
