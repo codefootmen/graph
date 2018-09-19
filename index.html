@@ -3,40 +3,136 @@
 
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="public/material/css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="public/bulma/css/bulma.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="public/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
-  <div class="row">
-    <div class="col s4">
-      <h5>Vertices</h5>
-      <form id="createVertices" autocomplete="off">
-        <div class="input-field">
-          <input id="vertices" name="vertices" type="number" class="validate" value="6">
-        </div>
-        <button type="submit" class="waves-effect waves-light btn ">Create</button>
-      </form>
-      <form id="createEdges">
-        <h5>Edges</h5>
-        <div id="verticesCheckboxes" class="row">
-        </div>
-      </form>
-    </div>
-    <div class="col s8">
-      <div class="row">
-        <div class="col s6">
-        </br>
-          <button id="show-graph" class="waves-effect waves-light btn">SHOW ADJACENCY MATRIX</button>
-          <div class="row">
-            <div id="canvas" class="col s12">
+  <div class="container is-fluid">
+    <div class="columns">
+      <div class="column is-3">
+        <div class="field">
+          <form id="createVertices" autocomplete="off">
+            <div class="field">
+              <label class="label">Vertex</label>
+              <div class="control">
+                <input name="vertex" class="input" type="text" placeholder="Text input">
+              </div>
             </div>
+            <div class="control">
+              <button type="submit" class="button is-link">Create</button>
+            </div>
+          </form>
+        </div>
+        <div class="field">
+          <form id="createEdges">
+            <div class="field">
+              <label class="label">Edge</label>
+              <div id="verticesCheckboxes" class="control">
+                <div class="select">
+                  <select id="select-a" name="select-a" class="select-vertex">
+                    <option value="" hidden>Select</option>
+                  </select>
+                </div>
+                <div class="select">
+                  <select id="select-b" name="select-b" class="select-vertex">
+                    <option value="" hidden>Select</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button id="createEdgesSubmitButton" type="submit" class="button is-link" disabled>Create</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="field">
+          <form id="deleteVertex">
+            <div class="field">
+              <label class="label">Delete Vertex</label>
+              <div id="vertices-delete" class="control">
+                <div class="select">
+                  <select id="select-to-delete" name="select-to-delete" class="select-vertex">
+                      <option value="" hidden>Select</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button id="deleteVertexSubmitButton" type="submit" class="button is-link" disabled>Delete</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="field">
+          <form id="deleteEdge">
+            <div class="field">
+              <label class="label">Delete Edge</label>
+              <div id="edges-delete" class="control">
+                <div class="select">
+                  <select id="select-edge-to-delete" name="select-to-delete" class="select-edge">
+                    <option value="" hidden>Select</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button id="deleteEdgeSubmitButton" type="submit" class="button is-link" disabled>Delete</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="field">
+          <div class="control">
+            <button id="show-graph" class="button is-link">SHOW ADJACENCY MATRIX</button>
           </div>
         </div>
       </div>
+      <div id="canvas" class="column">
+      </div>
     </div>
   </div>
-  <script type="text/javascript" src="public/material/js/materialize.min.js"></script>
+
+  <div class="tile is-parent footer">
+    <article class="tile is-child notification is-link columns">
+      <div class="column">
+        <p>
+          Order: <span id="order"></span>
+        </p>
+      </div>
+      <div class="column">
+        <p>In-Degree:
+          <span id="inDegree">
+          </span>
+        </p>
+        <div id="calcInDegree" class="control">
+          <div class="select">
+            <select id="selectInDegree" name="select-c" class="select-vertex">
+              <option hidden>Select</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <p>Out-Degree:
+          <span id="outDegree">
+          </span>
+        </p>
+        <div id="calcOutDegree" class="control">
+          <div class="select">
+            <select id="selectOutDegree" name="select-d" class="select-vertex">
+              <option hidden>Select</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
   <script src="public/bundle.js"></script>
 </body>
 

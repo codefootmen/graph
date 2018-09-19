@@ -1,12 +1,13 @@
-import JsonGraph from './app/jsonGraph';
-import WindowEvents from './view/windowEvents';
-import ButtonEvents from './view/buttonEvents';
+import initViewEvents from './view';
+import Graph from './app/graph';
 
-let graph = new JsonGraph();
-window.graph = graph;
+if (!window.graph){
+  let graph = new Graph([], []);
+  window.graph = graph;
+  console.log('window created', window.graph);
+}
 
-WindowEvents();
-ButtonEvents();
+initViewEvents();
 
 
 
