@@ -15,7 +15,8 @@ class Home extends Component {
             success: false,
             order: null,
             inDegree: null,
-            outDegree: null
+            outDegree: null,
+            disableEdge: true
         }
         this.handler = this.handler.bind(this);
     }
@@ -35,7 +36,7 @@ class Home extends Component {
                         <Title>Menu</Title>
                         <Box>
                             <VertexInput handler={this.handler} graph={this.state.graph} />
-                            <EdgeInput handler={this.handler} graph={this.state.graph} />
+                            <EdgeInput handler={this.handler} graph={this.state.graph} disableEdge={this.state.disableEdge} />
                         </Box>
                     </Column>
                     <Column>

@@ -65,7 +65,7 @@ class EdgeInput extends Component {
                 <Field>
                     <Input onChange={this.handleChange} value={this.state.cost} style={{ maxWidth: 80 }} type="number" min={0} />
                 </Field>
-                <Button isColor='info' onClick={this.handleSubmit}>Create</Button>
+                <Button isColor='info' onClick={this.handleSubmit} disabled={this.props.disableEdge}>Create</Button>
             </div>
         );
     }
