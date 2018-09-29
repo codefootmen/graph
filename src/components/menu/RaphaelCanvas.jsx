@@ -67,8 +67,8 @@ class RaphaelCanvas extends Component {
                                     r={this.props.canvas.vertexRadius}
                                     attr={{ "stroke": "#0b8ac9", "stroke-width": 2 }}>
                                 </Circle>
-                                <Text x={this.state.initialPosition.x}
-                                    y={this.state.initialPosition.y + 25}
+                                <Text x={this.state.origin.x + (math.cos(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)}
+                                    y={(this.state.origin.y + (math.sin(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)) + 25}
                                     text={value} />
                             </Set>
                         )
