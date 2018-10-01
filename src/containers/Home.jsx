@@ -4,6 +4,7 @@ import VertexInput from '../components/menu/VertexInput';
 import EdgeInput from '../components/menu/EdgeInput';
 import RaphaelCanvas from '../components/menu/RaphaelCanvas';
 import Graph from '../utils/Graph';
+import DeleteVertexInput from '../components/menu/DeleteVertexInput';
 
 
 
@@ -37,6 +38,7 @@ class Home extends Component {
                         <Box>
                             <VertexInput handler={this.handler} graph={this.state.graph} />
                             <EdgeInput handler={this.handler} graph={this.state.graph} disableEdge={this.state.disableEdge} />
+                            <DeleteVertexInput handler = {this.handler} graph= {this.state.graph}/>
                         </Box>
                     </Column>
                     <Column>

@@ -12,7 +12,9 @@ class Graph {
     }
 
     delVertex({ vertex }) {
-
+        if(vertex !== ""){
+          delete this[vertex];
+        }
     }
 
     delEdge({ edge }) {
