@@ -22,11 +22,17 @@ class Graph {
     }
 
     getInDegree({ vertex }) {
-
+        if(vertex){
+            return 'works';
+        }
+        return '';
     }
 
     getOutDegree({ vertex }) {
-
+        if(vertex){
+            return 'works';
+        }
+        return '';
     }
 
     getOrder() {

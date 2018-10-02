@@ -24,6 +24,7 @@ class RaphaelCanvas extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleMouseOver = this.handleMouseOver.bind(this);
     }
 
     handleChange(event) {
@@ -38,21 +39,19 @@ class RaphaelCanvas extends Component {
 
     }
 
+    handleMouseOver(vertex) {
+        this.props.handler({
+            vertexOnHover: vertex.data().vertex
+        })
+    }
+
     componentDidMount() {
 
     }
 
     render() {
-        var data = [
-            { x: 50, y: 50, r: 40, attr: { "stroke": "#0b8ac9", "stroke-width": 5 }, animate: Raphael.animation({ cx: 60 }, 500, "<>") },
-            { x: 100, y: 100, r: 40, attr: { "stroke": "#f0c620", "stroke-width": 5 }, animate: Raphael.animation({ cx: 105 }, 500, "<>") },
-            { x: 150, y: 50, r: 40, attr: { "stroke": "#1a1a1a", "stroke-width": 5 } },
-            { x: 200, y: 100, r: 40, attr: { "stroke": "#10a54a", "stroke-width": 5 }, animate: Raphael.animation({ cx: 195 }, 500, "<>") },
-            { x: 250, y: 50, r: 40, attr: { "stroke": "#e11032", "stroke-width": 5 }, animate: Raphael.animation({ cx: 240 }, 500, "<>") }
-        ]
-
         let increment = (360 / (this.props.graph.getOrder() || 1))
-
+        let self = this;
         return (
             < Paper width={this.props.canvas.height} height={this.props.canvas.height} >
                 <Set>
@@ -61,11 +60,13 @@ class RaphaelCanvas extends Component {
                     {Object.keys(this.props.graph).map((value, i) => {
                         return (
                             <Set key={i}>
-                                {console.log("Aqui:", this.state.radius)}
-                                <Circle x={this.state.origin.x + (math.cos(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)}
+                                <Circle
+                                    data={{ vertex: value }}
+                                    mouseover={function () { return self.handleMouseOver(this) }}
+                                    x={this.state.origin.x + (math.cos(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)}
                                     y={this.state.origin.y + (math.sin(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)}
                                     r={this.props.canvas.vertexRadius}
-                                    attr={{ "stroke": "#0b8ac9", "stroke-width": 2 }}>
+                                    attr={{ "fill": "#0b8ac9", "stroke-width": 2, "cursor": "pointer" }}>
                                 </Circle>
                                 <Text x={this.state.origin.x + (math.cos(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)}
                                     y={(this.state.origin.y + (math.sin(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)) + 25}

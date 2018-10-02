@@ -15,9 +15,8 @@ class Home extends Component {
             graph: new Graph(),
             success: false,
             order: null,
-            inDegree: null,
-            outDegree: null,
-            disableEdge: true
+            disableEdge: true,
+            vertexOnHover: ""
         }
         this.handler = this.handler.bind(this);
     }
@@ -38,12 +37,12 @@ class Home extends Component {
                         <Box>
                             <VertexInput handler={this.handler} graph={this.state.graph} />
                             <EdgeInput handler={this.handler} graph={this.state.graph} disableEdge={this.state.disableEdge} />
-                            <DeleteVertexInput handler = {this.handler} graph= {this.state.graph}/>
+                            <DeleteVertexInput handler={this.handler} graph={this.state.graph} />
                         </Box>
                     </Column>
                     <Column>
                         <Title>Graph</Title>
-                        <Box><RaphaelCanvas graph={this.state.graph} canvas={{ height: 300, width: 300, vertexRadius: 15 }} /></Box>
+                        <Box><RaphaelCanvas handler={this.handler} graph={this.state.graph} canvas={{ height: 300, width: 300, vertexRadius: 15 }} /></Box>
                         <Columns>
                             <Column>
                                 <Box>
@@ -52,10 +51,10 @@ class Home extends Component {
                                             Order: {this.state.order}
                                         </Column>
                                         <Column>
-                                            In Degree: {this.state.inDegree}
+                                            In Degree: {this.state.graph.getInDegree({ vertex: this.state.vertexOnHover })}
                                         </Column>
                                         <Column>
-                                            Out Degree: {this.state.outDegree}
+                                            Out Degree: {this.state.graph.getOutDegree({ vertex: this.state.vertexOnHover })}
                                         </Column>
                                     </Columns>
                                 </Box>
