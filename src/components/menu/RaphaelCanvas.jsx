@@ -52,28 +52,45 @@ class RaphaelCanvas extends Component {
     render() {
         let increment = (360 / (this.props.graph.getOrder() || 1))
         let self = this;
+        let vertices = [];
+        let lines = [];
         return (
-            < Paper width={this.props.canvas.height} height={this.props.canvas.height} >
+            <Paper width={this.props.canvas.height} height={this.props.canvas.height} >
                 <Set>
                     {JSON.stringify(this.props.graph)}
 
                     {Object.keys(this.props.graph).map((value, i) => {
+
+                        vertices[i] = <Circle
+                            data={{ vertex: value }}
+                            mouseover={function () { return self.handleMouseOver(this) }}
+                            x={this.state.origin.x + (math.cos(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)}
+                            y={this.state.origin.y + (math.sin(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)}
+                            r={this.props.canvas.vertexRadius}
+                            attr={{ "fill": "#0b8ac9", "stroke-width": 2, "cursor": "pointer" }} />
+
                         return (
                             <Set key={i}>
-                                <Circle
-                                    data={{ vertex: value }}
-                                    mouseover={function () { return self.handleMouseOver(this) }}
-                                    x={this.state.origin.x + (math.cos(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)}
-                                    y={this.state.origin.y + (math.sin(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)}
-                                    r={this.props.canvas.vertexRadius}
-                                    attr={{ "fill": "#0b8ac9", "stroke-width": 2, "cursor": "pointer" }}>
-                                </Circle>
+                                {vertices[i]}
                                 <Text x={this.state.origin.x + (math.cos(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)}
                                     y={(this.state.origin.y + (math.sin(math.unit((increment * i), 'deg')) * this.state.circleFrameRadius)) + 25}
                                     text={value} />
                             </Set>
                         )
                     })}
+
+                    {Object.keys(this.props.graph).map((start, i) => {
+                        this.props.graph[start].forEach(end => {
+                            lines.push(<Line
+                                x1={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex == start)[0])].props.x}
+                                y1={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex == start)[0])].props.y}
+                                x2={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex == end.name)[0])].props.x}
+                                y2={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex == end.name)[0])].props.y}
+                            />);
+                        });
+                        return lines;
+                    })
+                    }
                 </Set>
             </Paper >
         );
