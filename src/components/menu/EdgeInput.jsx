@@ -11,12 +11,24 @@ class EdgeInput extends Component {
             endVertex: "",
             cost: 0,
             success: false,
-            error: false
+            error: false,
+            directed: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleEndVertexSelectChange = this.handleEndVertexSelectChange.bind(this);
         this.handleStartVertexSelectChange = this.handleStartVertexSelectChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
     }
 
     handleEndVertexSelectChange(event) {
@@ -28,6 +40,10 @@ class EdgeInput extends Component {
 
     handleSubmit() {
         this.props.graph.addEdge({ start: this.state.startVertex, end: this.state.endVertex, cost: this.state.cost });
+
+        {this.state.directed ?
+            "" : this.props.graph.addEdge({ start: this.state.endVertex, end: this.state.startVertex, cost: this.state.cost })}
+
         this.props.handler({
             graph: this.props.graph
         });
@@ -52,6 +68,13 @@ class EdgeInput extends Component {
             <div className="menu-row">
                 <Field>
                     <Label>Edge
+                        <label className="switch">
+                            <input name="directed" type="checkbox" checked={this.state.directed} onChange={this.handleInputChange} />
+                            <div className="slider round"></div>
+                        </label>
+                        {this.state.directed ?
+                            <Tag isColor="success">Directed</Tag> : <Tag isColor="danger">Undirected</Tag>}
+
                         {this.state.success ?
                             <Tag isColor="success">{this.state.vertex} created</Tag> : ""}
                         {this.state.error ?
