@@ -30,7 +30,7 @@ class Graph {
 
     getOutDegree({ vertex }) {
         if(vertex){
-            return 'works';
+            return this[vertex].length;
         }
         return '';
     }
