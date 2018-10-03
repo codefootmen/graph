@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Control, Input, Field, Label, Tag } from 'bloomer';
+import { Radio } from 'bloomer/lib/elements/Form/Radio';
+import { Checkbox } from 'bloomer/lib/elements/Form/Checkbox';
 
 class VertexInput extends Component {
     constructor(props) {
@@ -7,7 +9,8 @@ class VertexInput extends Component {
         this.state = {
             vertex: "",
             success: false,
-            error: false
+            error: false,
+            directed: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,10 +40,15 @@ class VertexInput extends Component {
             <div className="menu-row">
                 <Field>
                     <Label>Vertex
-                        {this.state.success ?
-                            <Tag isColor="success">{this.state.vertex} created</Tag> : ""}
-                        {this.state.error ?
-                            <Tag isColor="danger">Error</Tag> : ""}
+                        <label className="switch">
+                            <input type="checkbox" checked={this.state.directed}/>
+                            <span className="slider round"></span>
+                            <span></span>
+                        </label>
+                            {this.state.success ?
+                                <Tag isColor="success">{this.state.vertex} created</Tag> : ""}
+                            {this.state.error ?
+                                <Tag isColor="danger">Error</Tag> : ""}
                     </Label>
                     <Control>
                         <Input type="text" value={this.state.vertex} onChange={this.handleChange} placeholder='Vertex name' />
