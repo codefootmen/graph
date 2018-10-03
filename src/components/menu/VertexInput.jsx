@@ -9,12 +9,13 @@ class VertexInput extends Component {
         this.state = {
             vertex: "",
             success: false,
-            error: false,
-            directed: false
+            error: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+
 
     handleChange(event) {
         this.setState({
@@ -40,15 +41,10 @@ class VertexInput extends Component {
             <div className="menu-row">
                 <Field>
                     <Label>Vertex
-                        <label className="switch">
-                            <input type="checkbox" checked={this.state.directed}/>
-                            <span className="slider round"></span>
-                            <span></span>
-                        </label>
-                            {this.state.success ?
-                                <Tag isColor="success">{this.state.vertex} created</Tag> : ""}
-                            {this.state.error ?
-                                <Tag isColor="danger">Error</Tag> : ""}
+                        {this.state.success ?
+                            <Tag isColor="success">{this.state.vertex} created</Tag> : ""}
+                        {this.state.error ?
+                            <Tag isColor="danger">Error</Tag> : ""}
                     </Label>
                     <Control>
                         <Input type="text" value={this.state.vertex} onChange={this.handleChange} placeholder='Vertex name' />
