@@ -64,5 +64,20 @@ class Graph {
         })
         return contains;
     }
+
+    isRegular() {
+        let degree = 0;
+        let regular = true;
+        Object.keys(this).forEach((vx, i) => {
+            if (i == 0) {
+                degree = this.getOutDegree({ vertex: vx }) + this.getInDegree({ vertex: vx });
+            } else {
+                if (degree != (this.getOutDegree({ vertex: vx }) + this.getInDegree({ vertex: vx }))) {
+                    regular = false;
+                }
+            }
+        });
+        return regular;
+    }
 }
 export default Graph;
