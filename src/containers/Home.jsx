@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Column, Columns, Container, Title, Box } from 'bloomer';
+import { Column, Columns, Container, Title, Box, Tag } from 'bloomer';
 import VertexInput from '../components/menu/VertexInput';
 import EdgeInput from '../components/menu/EdgeInput';
 import RaphaelCanvas from '../components/menu/RaphaelCanvas';
@@ -44,7 +44,10 @@ class Home extends Component {
                     </Column>
                     <Column>
                         <Title>Graph</Title>
-                        <Box><RaphaelCanvas handler={this.handler} graph={this.state.graph} canvas={{ height: 300, width: 300, vertexRadius: 15 }} /></Box>
+                        <Box>
+
+                            <RaphaelCanvas handler={this.handler} graph={this.state.graph} canvas={{ height: 600, width: 600, vertexRadius: 15 }} />
+                        </Box>
                         <Columns>
                             <Column>
                                 <Box>
@@ -57,6 +60,12 @@ class Home extends Component {
                                         </Column>
                                         <Column>
                                             Out Degree: {this.state.graph.getOutDegree({ vertex: this.state.vertexOnHover })}
+                                        </Column>
+                                        <Column>
+                                        {this.state.graph.isComplete() ?
+                                            <Tag isColor="info">Complete</Tag> : ''}
+                                        {this.state.graph.isRegular() ?
+                                            <Tag isColor="info">Regular</Tag> : ''}
                                         </Column>
                                     </Columns>
                                 </Box>
