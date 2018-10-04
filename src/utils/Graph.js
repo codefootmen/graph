@@ -18,7 +18,7 @@ class Graph {
     }
 
     delEdge({ start, end }) {
-        this[start].filter(x => x === end ? false : true);
+        this[start] = this[start].filter(x => { console.log(x); return (x.name == end) ? false : true });
     }
 
     getInDegree({ vertex }) {
@@ -50,11 +50,9 @@ class Graph {
     }
 
     isComplete() {
-
         let contains = true;
         Object.keys(this).forEach((x) => {
             Object.keys(this).forEach((t) => {
-                console.log(this[x], new Vertex(t, 0))
                 if (t != x) {
                     if (!this[x].map(d => d.name).includes(t)) {
                         contains = false;

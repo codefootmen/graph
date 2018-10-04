@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import { Button, Control, Input, Field, Label, Tag } from 'bloomer';
-import Select from './withSelect';
+import Select from './withSelectArray';
 
 class DeleteEdgeInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
             edge: this.edge,
-            startVertex: this.startVertex,
-            endVertex: this.endVertex,
+            startVertex: '',
+            endVertex: '',
             success: false,
             error: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleStartVertexSelectChange = this.handleStartVertexSelectChange.bind(this);
-        this.handleEndVertexSelectChange = this.handleEndVertexSelectChange.bind(this);
+        this.handleEdgeChange = this.handleEdgeChange.bind(this);
     }
 
     handleSubmit() {
@@ -22,41 +21,33 @@ class DeleteEdgeInput extends Component {
         this.props.handler({
             graph: this.props.graph
         });
-
     }
 
-    handleStartVertexSelectChange(event) {
+    handleEdgeChange(event) {
+        let first = event.target.value.split(',')[0];
+        let second = event.target.value.split(',')[1];
+        console.log(first, second);
         this.setState({
-            startVertex: event.target.value
-        })
-        console.log(event.target.value)
-    }
-
-    handleEndVertexSelectChange(event) {
-        this.setState({
-            endVertex: event.target.value
+            startVertex: first,
+            endVertex: second
         });
-        console.log(event.target.value);
     }
-
 
     render() {
 
         let edges = [];
-        if (this.state.graph) {
-            Object.keys(this.state.graph).forEach(x => {
-                edges = edges.concat(this.state.graph[x].map(t => [x, t]));
+        if (this.props.graph) {
+            Object.keys(this.props.graph).forEach(x => {
+                edges = edges.concat(this.props.graph[x].map(t => [x, t.name]));
             });
         }
-        console.log("EDGES",edges);
 
         return (
             <div className="menu-row" >
                 <Field>
                     <Label>Delete Edge </Label>
                     <Control>
-                        <Select onChange={this.handleEdgeChange} value={this.state.startVertex} options={this.props.graph} />
-                        <Select onChange={this.handleEdgeChange} value={this.state.endVertex} options={this.props.graph} />
+                        <Select onChange={this.handleEdgeChange} options={edges} />
                     </Control>
                 </Field>
                 <Button isColor='info' onClick={this.handleSubmit} disabled={this.props.disableEdge}>Delete</Button>
