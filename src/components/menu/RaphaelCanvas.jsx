@@ -88,9 +88,9 @@ class RaphaelCanvas extends Component {
                                 y2={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex == end.name)[0])].props.y}
                             />);
                         });
-                        return lines;
                     })
-                    }
+                }
+                {lines}
                 </Set>
             </Paper >
         );
