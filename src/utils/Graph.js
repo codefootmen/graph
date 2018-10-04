@@ -12,24 +12,24 @@ class Graph {
     }
 
     delVertex({ vertex }) {
-        if(vertex !== ""){
-          delete this[vertex];
+        if (vertex !== "") {
+            delete this[vertex];
         }
     }
 
-    delEdge({ edge }) {
-
+    delEdge({ start, end }) {
+        this[start].filter(x => x === end ? false : true);
     }
 
     getInDegree({ vertex }) {
-        if(vertex){
+        if (vertex) {
             return 'works';
         }
         return '';
     }
 
     getOutDegree({ vertex }) {
-        if(vertex){
+        if (vertex) {
             return 'works';
         }
         return '';
