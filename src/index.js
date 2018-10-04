@@ -1,15 +1,8 @@
-import initViewEvents from './view';
-import Graph from './app/graph';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
 
-if (!window.graph){
-  let graph = new Graph([], []);
-  window.graph = graph;
-  console.log('window created', window.graph);
-}
-
-initViewEvents();
-
-
-
-
-
+ReactDOM.render(<App />, document.getElementById('root'));
+registerServiceWorker();
