@@ -35,7 +35,6 @@ class EdgeInput extends Component {
         this.setState({
             endVertex: event.target.value
         });
-        console.log(event.target.value);
     }
 
     handleSubmit() {
@@ -54,7 +53,6 @@ class EdgeInput extends Component {
         this.setState({
             startVertex: event.target.value
         })
-        console.log(event.target.value)
     }
 
     handleChange(event) {
