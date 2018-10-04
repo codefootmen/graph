@@ -12,8 +12,8 @@ class Graph {
     }
 
     delVertex({ vertex }) {
-        if(vertex !== ""){
-          delete this[vertex];
+        if (vertex !== "") {
+            delete this[vertex];
         }
     }
 
@@ -22,45 +22,60 @@ class Graph {
     }
 
     getInDegree({ vertex }) {
-        if(vertex){
-            var contadora = 0;
-            Object.keys(this).forEach((x)=>{                
-                console.log();
-                for (var i in Object.x) {
-                    console.log(Object.x[i].name);
-                    if( Object.x[i].name == vertex){
-                        contadora++;
-                    }
+        if (vertex) {
+            var count = 0;
+            Object.keys(this).forEach((vx) => {
+                if (vx != vertex) {
+                    this[vx].forEach(edge => {
+                        if (edge.name == vertex) {
+                            count++;
+                        }
+                    })
                 }
-            })  
-            
+            })
+
             /* if(x!=[]){
             x.forEach((y)=>{
                 if(y == vertex){
-                contadora++;
+                count++;
             }
             })
             }*/
-                
+
             /*    entrar na lista de cada objeto
             verificar se endVertex = vertex
-            entao contadora++
+            entao count++
             */
-            return contadora;
-            
+            return count;
+
         }
-        return '';
+        return 0;
     }
 
     getOutDegree({ vertex }) {
-        if(vertex){
+        if (vertex) {
             return this[vertex].length;
         }
-        return '';
+        return 0;
     }
 
     getOrder() {
         return Object.keys(this).length;
+    }
+
+    isRegular() {
+        let degree = 0;
+        let regular = true;
+        Object.keys(this).forEach((vx, i) => {
+            if (i == 0) {
+                degree = this.getOutDegree({ vertex: vx }) + this.getInDegree({ vertex: vx });
+            } else {
+                if (degree != (this.getOutDegree({ vertex: vx }) + this.getInDegree({ vertex: vx }))) {
+                    regular = false;
+                }
+            }
+        });
+        return regular;
     }
 }
 export default Graph;

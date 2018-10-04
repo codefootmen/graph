@@ -56,6 +56,9 @@ class Home extends Component {
                                         <Column>
                                             Out Degree: {this.state.graph.getOutDegree({ vertex: this.state.vertexOnHover })}
                                         </Column>
+                                        <Column>
+                                            Regular: {this.state.graph.isRegular() ? "yes" : "no"}
+                                        </Column>
                                     </Columns>
                                 </Box>
                             </Column>
