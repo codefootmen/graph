@@ -62,6 +62,8 @@ class Home extends Component {
                                         <Column>
                                         {this.state.graph.isComplete() ?
                                             <Tag isColor="info">Complete</Tag> : ''}
+                                        {this.state.graph.isRegular() ?
+                                            <Tag isColor="info">Regular</Tag> : ''}
                                         </Column>
                                     </Columns>
                                 </Box>

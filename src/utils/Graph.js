@@ -23,33 +23,19 @@ class Graph {
 
     getInDegree({ vertex }) {
         if (vertex) {
-            var contadora = 0;
-            Object.keys(this).forEach((x) => {
-                console.log();
-                for (var i in Object.x) {
-                    console.log(Object.x[i].name);
-                    if (Object.x[i].name == vertex) {
-                        contadora++;
-                    }
+            var count = 0;
+            Object.keys(this).forEach((vx) => {
+                if (vx != vertex) {
+                    this[vx].forEach(edge => {
+                        if (edge.name == vertex) {
+                            count++;
+                        }
+                    })
                 }
             })
-
-            /* if(x!=[]){
-            x.forEach((y)=>{
-                if(y == vertex){
-                contadora++;
-            }
-            })
-            }*/
-
-            /*    entrar na lista de cada objeto
-            verificar se endVertex = vertex
-            entao contadora++
-            */
-            return contadora;
-
+            return count;
         }
-        return '';
+        return 0;
     }
 
     getOutDegree({ vertex }) {
