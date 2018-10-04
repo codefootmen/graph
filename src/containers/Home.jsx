@@ -43,6 +43,11 @@ class Home extends Component {
                     <Column>
                         <Title>Graph</Title>
                         <Box>
+                            {this.state.graph.isComplete() ?
+                                <Tag isColor="info">Complete</Tag> : ''}
+
+                            {this.state.graph.isRegular() ?
+                                <Tag isColor="success">Regular</Tag> : ''}
 
                             <RaphaelCanvas handler={this.handler} graph={this.state.graph} canvas={{ height: 600, width: 600, vertexRadius: 15 }} />
                         </Box>
@@ -58,12 +63,6 @@ class Home extends Component {
                                         </Column>
                                         <Column>
                                             Out Degree: {this.state.graph.getOutDegree({ vertex: this.state.vertexOnHover })}
-                                        </Column>
-                                        <Column>
-                                        {this.state.graph.isComplete() ?
-                                            <Tag isColor="info">Complete</Tag> : ''}
-                                        {this.state.graph.isRegular() ?
-                                            <Tag isColor="info">Regular</Tag> : ''}
                                         </Column>
                                     </Columns>
                                 </Box>
