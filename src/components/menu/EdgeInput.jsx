@@ -11,8 +11,6 @@ class EdgeInput extends Component {
             endVertex: "",
             cost: 0,
             id: 0,
-            success: false,
-            error: false,
             directed: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -51,7 +49,6 @@ class EdgeInput extends Component {
                 cost: this.state.cost,
                 id: this.state.id})}
         this.setState({id: this.state.id + 1});
-
         this.props.handler({
             graph: this.props.graph
         });
@@ -81,11 +78,6 @@ class EdgeInput extends Component {
                         </label>
                         {this.state.directed ?
                             <Tag isColor="success">Directed</Tag> : <Tag isColor="danger">Undirected</Tag>}
-
-                        {this.state.success ?
-                            <Tag isColor="success">{this.state.vertex} created</Tag> : ""}
-                        {this.state.error ?
-                            <Tag isColor="danger">Error</Tag> : ""}
                     </Label>
                     <Control className="edge-selects-wrapper">
                         <Select onChange={this.handleStartVertexSelectChange} value={this.state.startVertex} options={this.props.graph} />
