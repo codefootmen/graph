@@ -6,6 +6,7 @@ import RaphaelCanvas from '../components/menu/RaphaelCanvas';
 import Graph from '../utils/Graph';
 import DeleteVertexInput from '../components/menu/DeleteVertexInput';
 import DeleteEdgeInput from '../components/menu/DeleteEdgeInput';
+import Dropzone from 'react-dropzone';
 
 
 
@@ -20,6 +21,7 @@ class Home extends Component {
             vertexOnHover: ""
         }
         this.handler = this.handler.bind(this);
+        this.onDrop = this.onDrop.bind(this);
     }
     componentDidMount() {
         console.log(this.state.graph);
@@ -27,6 +29,14 @@ class Home extends Component {
 
     handler(state) {
         this.setState(state);
+    }
+
+    onDrop(acceptedFiles, rejectedFiles){
+        fetch('http://localhost:5000/read',{
+            method: "POST",
+            body: acceptedFiles
+        },            
+        ).then(response=> response.json());
     }
 
     render() {
@@ -40,6 +50,12 @@ class Home extends Component {
                             <EdgeInput handler={this.handler} graph={this.state.graph} disableEdge={this.state.disableEdge} />
                             <DeleteVertexInput handler={this.handler} graph={this.state.graph} />
                             <DeleteEdgeInput handler={this.handler} graph={this.state.graph} />
+                            <Dropzone onDrop = {(files) => this.onDrop(files)}>
+                            <div> 
+                                Upload
+                            </div>
+                            </Dropzone>
+
                         </Box>
                     </Column>
                     <Column>

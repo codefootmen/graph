@@ -10,6 +10,7 @@
     "raphael": "^2.2.7",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-dropzone": "^6.2.3",
     "react-raphael": "^0.9.0",
     "react-scripts": "1.1.5"
   },
