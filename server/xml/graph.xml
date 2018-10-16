@@ -1,0 +1,15 @@
+<graph id="GrafoA" edgedefault="directed" tipoAresta="false">
+  <node id="A"/>
+  <node id="B"/>
+  <node id="C"/>
+  <node id="D"/>
+  <node id="E"/>
+  <edge id="A1" source="A" target="B"/>
+  <edge id="A2" source="A" target="C"/>
+  <edge id="A3" source="B" target="E"/>
+  <edge id="A4" source="B" target="D"/>
+  <edge id="A5" source="C" target="E"/>
+  <edge id="A6" source="C" target="D"/>
+  <edge id="A7" source="D" target="E"/>
+  <edge id="A8" source="D" target="C"/>
+</graph>

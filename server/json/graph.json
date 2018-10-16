@@ -1,0 +1,94 @@
+{
+    "graph": {
+        "$": {
+            "id": "GrafoA",
+            "edgedefault": "directed",
+            "tipoAresta": "false"
+        },
+        "node": [
+            {
+                "$": {
+                    "id": "A"
+                }
+            },
+            {
+                "$": {
+                    "id": "B"
+                }
+            },
+            {
+                "$": {
+                    "id": "C"
+                }
+            },
+            {
+                "$": {
+                    "id": "D"
+                }
+            },
+            {
+                "$": {
+                    "id": "E"
+                }
+            }
+        ],
+        "edge": [
+            {
+                "$": {
+                    "id": "A1",
+                    "source": "A",
+                    "target": "B"
+                }
+            },
+            {
+                "$": {
+                    "id": "A2",
+                    "source": "A",
+                    "target": "C"
+                }
+            },
+            {
+                "$": {
+                    "id": "A3",
+                    "source": "B",
+                    "target": "E"
+                }
+            },
+            {
+                "$": {
+                    "id": "A4",
+                    "source": "B",
+                    "target": "D"
+                }
+            },
+            {
+                "$": {
+                    "id": "A5",
+                    "source": "C",
+                    "target": "E"
+                }
+            },
+            {
+                "$": {
+                    "id": "A6",
+                    "source": "C",
+                    "target": "D"
+                }
+            },
+            {
+                "$": {
+                    "id": "A7",
+                    "source": "D",
+                    "target": "E"
+                }
+            },
+            {
+                "$": {
+                    "id": "A8",
+                    "source": "D",
+                    "target": "C"
+                }
+            }
+        ]
+    }
+}
