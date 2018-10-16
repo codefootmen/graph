@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { Column, Columns, Container, Title, Box, Tag } from 'bloomer';
+import { Column, Columns, Container, Title, Box, Tag, Button } from 'bloomer';
 import VertexInput from '../components/menu/VertexInput';
 import EdgeInput from '../components/menu/EdgeInput';
 import RaphaelCanvas from '../components/menu/RaphaelCanvas';
 import Graph from '../utils/Graph';
 import DeleteVertexInput from '../components/menu/DeleteVertexInput';
 import DeleteEdgeInput from '../components/menu/DeleteEdgeInput';
-import Dropzone from 'react-dropzone';
-
-
+import Upload from 'rc-upload';
 
 class Home extends Component {
     constructor(props) {
@@ -21,22 +19,14 @@ class Home extends Component {
             vertexOnHover: ""
         }
         this.handler = this.handler.bind(this);
-        this.onDrop = this.onDrop.bind(this);
     }
+
     componentDidMount() {
         console.log(this.state.graph);
     }
 
     handler(state) {
         this.setState(state);
-    }
-
-    onDrop(acceptedFiles, rejectedFiles){
-        fetch('http://localhost:5000/read',{
-            method: "POST",
-            body: acceptedFiles
-        },            
-        ).then(response=> response.json());
     }
 
     render() {
@@ -50,12 +40,9 @@ class Home extends Component {
                             <EdgeInput handler={this.handler} graph={this.state.graph} disableEdge={this.state.disableEdge} />
                             <DeleteVertexInput handler={this.handler} graph={this.state.graph} />
                             <DeleteEdgeInput handler={this.handler} graph={this.state.graph} />
-                            <Dropzone onDrop = {(files) => this.onDrop(files)}>
-                            <div> 
-                                Upload
-                            </div>
-                            </Dropzone>
-
+                            <Upload action="http://localhost:5000/upload">
+                                <Button isColor='info'>Upload XML</Button>
+                            </Upload>
                         </Box>
                     </Column>
                     <Column>
