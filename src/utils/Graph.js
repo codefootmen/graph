@@ -42,7 +42,7 @@ class Graph {
         if (vertex) {
             return this[vertex].length;
         }
-        return '';
+        return 0;
     }
 
     getOrder() {
