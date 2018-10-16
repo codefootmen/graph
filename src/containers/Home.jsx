@@ -49,7 +49,7 @@ class Home extends Component {
                         <Title>Graph</Title>
                         <Box>
                             {this.state.graph.isDirected() ?
-                                <Tag isColor="danger">Undirected</Tag> : <Tag isColor="success">Directed</Tag>}
+                                <Tag isColor="danger">Undirected</Tag> : <Tag isColor="primary">Directed</Tag>}
 
                             {this.state.graph.isComplete() ?
                                 <Tag isColor="info">Complete</Tag> : ''}
