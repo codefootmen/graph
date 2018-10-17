@@ -6,6 +6,7 @@
     "bloomer": "^0.6.3",
     "bulma": "^0.7.1",
     "mathjs": "^5.1.2",
+    "nodemon": "^1.18.4",
     "raphael": "^2.2.7",
     "rc-upload": "^2.6.0",
     "react": "^16.5.2",
@@ -14,7 +15,7 @@
     "react-scripts": "1.1.5"
   },
   "scripts": {
-    "start": "react-scripts start & node server/app.js",
+    "start": "react-scripts start & nodemon server/app.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
