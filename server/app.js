@@ -61,8 +61,25 @@ app.post('/read', (req, res, next) => {
         }
 
         console.log("The file was saved!");
-        res.status(200).json({ status: "ok" });
-        next();
+        res.download('./xml/graph.xml', 'graph.xml', function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('feito');
+                next();
+            }
+        });
+    });
+});
+
+app.get('/download', (req, res, next) => {
+    res.download('./xml/graph.xml', 'graph.xml', function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('feito');
+            next();
+        }
     });
 });
 
@@ -74,6 +91,7 @@ app.post('/upload', (req, res, next) => {
         }
         res.status(200).send(`File ${imageFile.name} uploaded`);
         console.log(`File ${imageFile.name} uploaded`);
+        next();
     });
 });
 

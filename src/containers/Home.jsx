@@ -7,6 +7,7 @@ import Graph from '../utils/Graph';
 import DeleteVertexInput from '../components/menu/DeleteVertexInput';
 import DeleteEdgeInput from '../components/menu/DeleteEdgeInput';
 import Upload from 'rc-upload';
+import Download from 'js-file-download';
 
 class Home extends Component {
     constructor(props) {
@@ -14,7 +15,6 @@ class Home extends Component {
         this.state = {
             graph: new Graph(),
             success: false,
-            order: null,
             disableEdge: true,
             vertexOnHover: ""
         }
@@ -47,13 +47,19 @@ class Home extends Component {
         fetch('http://localhost:5000/read', {
             method: "POST",
             mode: "cors",
-            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            cache: "no-cache",
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
             },
-            body: JSON.stringify(this.state.graph), // body data type must match "Content-Type" header
+            body: JSON.stringify(this.state.graph),
         })
-            .then(response => console.log(response));
+            .then(response => response.text());
+    }
+
+    download() {
+        fetch('http://localhost:5000/download')
+            .then(response => response.text())
+            .then(data => Download(data, 'graph.xml'));
     }
 
     render() {
@@ -89,6 +95,13 @@ class Home extends Component {
                                     Save Graph
                                 </Button>
                             </div>
+                            <div className="menu-row" >
+                                <Button
+                                    isColor='info'
+                                    onClick={this.download}>
+                                    Download XML
+                                </Button>
+                            </div>
 
                         </Box>
                     </Column>
@@ -111,7 +124,7 @@ class Home extends Component {
                                 <Box>
                                     <Columns>
                                         <Column>
-                                            Order: {this.state.order}
+                                            Order: {this.state.graph.getOrder()}
                                         </Column>
                                         <Column>
                                             In Degree: {this.state.graph.getInDegree({ vertex: this.state.vertexOnHover })}
