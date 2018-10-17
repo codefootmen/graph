@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { Column, Columns, Container, Title, Box, Tag } from 'bloomer';
+import { Column, Columns, Container, Title, Box, Tag, Button } from 'bloomer';
 import VertexInput from '../components/menu/VertexInput';
 import EdgeInput from '../components/menu/EdgeInput';
 import RaphaelCanvas from '../components/menu/RaphaelCanvas';
 import Graph from '../utils/Graph';
 import DeleteVertexInput from '../components/menu/DeleteVertexInput';
 import DeleteEdgeInput from '../components/menu/DeleteEdgeInput';
-import Dropzone from 'react-dropzone';
-
-
+import Upload from 'rc-upload';
 
 class Home extends Component {
     constructor(props) {
@@ -21,9 +19,11 @@ class Home extends Component {
             vertexOnHover: ""
         }
         this.handler = this.handler.bind(this);
-        this.onDrop = this.onDrop.bind(this);
+        this.read = this.read.bind(this);
     }
+
     componentDidMount() {
+
         console.log(this.state.graph);
     }
 
@@ -31,12 +31,15 @@ class Home extends Component {
         this.setState(state);
     }
 
-    onDrop(acceptedFiles, rejectedFiles){
-        fetch('http://localhost:5000/read',{
-            method: "POST",
-            body: acceptedFiles
-        },            
-        ).then(response=> response.json());
+    read() {
+        fetch('http://localhost:5000/read')
+            .then((response) => {
+                return response.json();
+            })
+            .then((json) => {
+                Object.setPrototypeOf(json, new Graph());
+                this.setState({ graph: json });
+            });
     }
 
     render() {
@@ -50,11 +53,21 @@ class Home extends Component {
                             <EdgeInput handler={this.handler} graph={this.state.graph} disableEdge={this.state.disableEdge} />
                             <DeleteVertexInput handler={this.handler} graph={this.state.graph} />
                             <DeleteEdgeInput handler={this.handler} graph={this.state.graph} />
-                            <Dropzone onDrop = {(files) => this.onDrop(files)}>
-                            <div> 
-                                Upload
+                            <Upload
+                                action="http://localhost:5000/upload"
+                                onSuccess={this.read}
+                            >
+                                <div className="menu-row" >
+                                    <Button isColor='info'>Upload XML</Button>
+                                </div>
+                            </Upload>
+                            <div className="menu-row" >
+                                <Button
+                                    isColor='info'
+                                    onClick={this.read}>
+                                    Load Graph From Server
+                                </Button>
                             </div>
-                            </Dropzone>
 
                         </Box>
                     </Column>
@@ -62,7 +75,7 @@ class Home extends Component {
                         <Title>Graph</Title>
                         <Box>
                             {this.state.graph.isDirected() ?
-                                <Tag isColor="danger">Undirected</Tag> : <Tag isColor="success">Directed</Tag>}
+                                <Tag isColor="danger">Undirected</Tag> : <Tag isColor="primary">Directed</Tag>}
 
                             {this.state.graph.isComplete() ?
                                 <Tag isColor="info">Complete</Tag> : ''}
