@@ -9,7 +9,7 @@ const xml2js = require('xml2js');
 const Vertex = require('./utils/Vertex')
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(fileUpload());
 
@@ -35,6 +35,34 @@ app.get('/read', (req, res, next) => {
             console.log(newj);
             next();
         });
+    });
+});
+
+app.post('/read', (req, res, next) => {
+    let json = req.body;
+    if (Object.getOwnPropertyNames(json).length == 0) {
+        res.status(500).send("Empty Object");
+        next();
+    }
+    let xml = '<graph id="graph">';
+    Object.keys(json).forEach(node => {
+        xml += `<node id="${node}"/>`;
+    });
+    Object.keys(json).forEach(node => {
+        json[node].forEach(edge => {
+            xml += `<edge id="${edge.id}" source="${node}" target="${edge.name}" cost="${edge.cost}"/>`;
+        });
+    });
+    xml += '</graph>';
+
+    fs.writeFile(__dirname + "/xml/graph.xml", xml, function (err) {
+        if (err) {
+            return console.log(err);
+        }
+
+        console.log("The file was saved!");
+        res.status(200).json({ status: "ok" });
+        next();
     });
 });
 

@@ -20,6 +20,7 @@ class Home extends Component {
         }
         this.handler = this.handler.bind(this);
         this.read = this.read.bind(this);
+        this.save = this.save.bind(this);
     }
 
     componentDidMount() {
@@ -40,6 +41,19 @@ class Home extends Component {
                 Object.setPrototypeOf(json, new Graph());
                 this.setState({ graph: json });
             });
+    }
+
+    save() {
+        fetch('http://localhost:5000/read', {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(this.state.graph), // body data type must match "Content-Type" header
+        })
+            .then(response => console.log(response));
     }
 
     render() {
@@ -66,6 +80,13 @@ class Home extends Component {
                                     isColor='info'
                                     onClick={this.read}>
                                     Load Graph From Server
+                                </Button>
+                            </div>
+                            <div className="menu-row" >
+                                <Button
+                                    isColor='info'
+                                    onClick={this.save}>
+                                    Save Graph
                                 </Button>
                             </div>
 
