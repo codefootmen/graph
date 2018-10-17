@@ -86,10 +86,13 @@ class RaphaelCanvas extends Component {
                                 y1={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex == start)[0])].props.y}
                                 x2={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex == end.name)[0])].props.x}
                                 y2={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex == end.name)[0])].props.y}
+                                attr={{ 'arrow-end' : 'open-wide-long', "stroke-width": 1.5}}
                             />);
                         });
                     })
                 }
+
+
                 {lines}
                 </Set>
             </Paper>
