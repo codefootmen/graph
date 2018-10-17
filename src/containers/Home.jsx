@@ -19,14 +19,27 @@ class Home extends Component {
             vertexOnHover: ""
         }
         this.handler = this.handler.bind(this);
+        this.read = this.read.bind(this);
     }
 
     componentDidMount() {
+
         console.log(this.state.graph);
     }
 
     handler(state) {
         this.setState(state);
+    }
+
+    read() {
+        fetch('http://localhost:5000/read')
+            .then((response) => {
+                return response.json();
+            })
+            .then((json) => {
+                Object.setPrototypeOf(json, new Graph());
+                this.setState({ graph: json });
+            });
     }
 
     render() {
@@ -40,9 +53,22 @@ class Home extends Component {
                             <EdgeInput handler={this.handler} graph={this.state.graph} disableEdge={this.state.disableEdge} />
                             <DeleteVertexInput handler={this.handler} graph={this.state.graph} />
                             <DeleteEdgeInput handler={this.handler} graph={this.state.graph} />
-                            <Upload action="http://localhost:5000/upload">
-                                <Button isColor='info'>Upload XML</Button>
+                            <Upload
+                                action="http://localhost:5000/upload"
+                                onSuccess={this.read}
+                            >
+                                <div className="menu-row" >
+                                    <Button isColor='info'>Upload XML</Button>
+                                </div>
                             </Upload>
+                            <div className="menu-row" >
+                                <Button
+                                    isColor='info'
+                                    onClick={this.read}>
+                                    Load Graph From Server
+                                </Button>
+                            </div>
+
                         </Box>
                     </Column>
                     <Column>
