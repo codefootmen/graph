@@ -91,8 +91,6 @@ class RaphaelCanvas extends Component {
                         });
                     })
                 }
-
-
                 {lines}
                 </Set>
             </Paper>
