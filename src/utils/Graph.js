@@ -7,8 +7,8 @@ class Graph {
         }
     }
 
-    addEdge({ start, end, cost }) {
-        this[start].push(new Vertex(end, cost));
+    addEdge({ start, end, cost, id}) {
+        this[start].push(new Vertex(end, cost, id));
     }
 
     delVertex({ vertex }) {
@@ -42,7 +42,7 @@ class Graph {
         if (vertex) {
             return this[vertex].length;
         }
-        return '';
+        return 0;
     }
 
     getOrder() {
@@ -76,6 +76,26 @@ class Graph {
             }
         });
         return regular;
+    }
+
+    isDirected() {
+        for(let key of Object.keys(this)) {
+            for(let edge of this[key]) {
+                if(this.readVertex(edge) != true){
+                    return false;
+                }
+            }
+        };
+        return true;
+    }
+
+    readVertex(soughtEdge) {
+        for(let edge of this[soughtEdge.name] ) {
+            if(edge.id === soughtEdge.id){
+                return true;
+            }
+        };
+        return false;
     }
 }
 export default Graph;

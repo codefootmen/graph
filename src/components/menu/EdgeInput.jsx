@@ -10,8 +10,7 @@ class EdgeInput extends Component {
             startVertex: "",
             endVertex: "",
             cost: 0,
-            success: false,
-            error: false,
+            id: 1,
             directed: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,11 +37,18 @@ class EdgeInput extends Component {
     }
 
     handleSubmit() {
-        this.props.graph.addEdge({ start: this.state.startVertex, end: this.state.endVertex, cost: this.state.cost });
+        this.props.graph.addEdge({
+            start: this.state.startVertex,
+            end: this.state.endVertex,
+            cost: this.state.cost,
+            id: 'E' + this.state.id});
 
-        {this.state.directed ?
-            "" : this.props.graph.addEdge({ start: this.state.endVertex, end: this.state.startVertex, cost: this.state.cost })}
-
+        {this.state.directed ? "" : this.props.graph.addEdge({
+                start: this.state.endVertex,
+                end: this.state.startVertex,
+                cost: this.state.cost,
+                id: 'E' + this.state.id})}
+        this.setState({id: this.state.id + 1});
         this.props.handler({
             graph: this.props.graph
         });
@@ -72,11 +78,6 @@ class EdgeInput extends Component {
                         </label>
                         {this.state.directed ?
                             <Tag isColor="success">Directed</Tag> : <Tag isColor="danger">Undirected</Tag>}
-
-                        {this.state.success ?
-                            <Tag isColor="success">{this.state.vertex} created</Tag> : ""}
-                        {this.state.error ?
-                            <Tag isColor="danger">Error</Tag> : ""}
                     </Label>
                     <Control className="edge-selects-wrapper">
                         <Select onChange={this.handleStartVertexSelectChange} value={this.state.startVertex} options={this.props.graph} />
