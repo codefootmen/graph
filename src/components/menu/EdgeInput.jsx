@@ -10,7 +10,7 @@ class EdgeInput extends Component {
             startVertex: "",
             endVertex: "",
             cost: 0,
-            id: 0,
+            id: 1,
             directed: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,13 +41,13 @@ class EdgeInput extends Component {
             start: this.state.startVertex,
             end: this.state.endVertex,
             cost: this.state.cost,
-            id: this.state.id});
+            id: 'E' + this.state.id});
 
         {this.state.directed ? "" : this.props.graph.addEdge({
                 start: this.state.endVertex,
                 end: this.state.startVertex,
                 cost: this.state.cost,
-                id: this.state.id})}
+                id: 'E' + this.state.id})}
         this.setState({id: this.state.id + 1});
         this.props.handler({
             graph: this.props.graph

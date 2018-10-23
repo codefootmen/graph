@@ -7,6 +7,7 @@ import Graph from '../utils/Graph';
 import DeleteVertexInput from '../components/menu/DeleteVertexInput';
 import DeleteEdgeInput from '../components/menu/DeleteEdgeInput';
 import Upload from 'rc-upload';
+import Download from 'js-file-download';
 
 class Home extends Component {
     constructor(props) {
@@ -14,12 +15,12 @@ class Home extends Component {
         this.state = {
             graph: new Graph(),
             success: false,
-            order: null,
             disableEdge: true,
             vertexOnHover: ""
         }
         this.handler = this.handler.bind(this);
         this.read = this.read.bind(this);
+        this.save = this.save.bind(this);
     }
 
     componentDidMount() {
@@ -40,6 +41,25 @@ class Home extends Component {
                 Object.setPrototypeOf(json, new Graph());
                 this.setState({ graph: json });
             });
+    }
+
+    save() {
+        fetch('http://localhost:5000/read', {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(this.state.graph),
+        })
+            .then(response => response.text());
+    }
+
+    download() {
+        fetch('http://localhost:5000/download')
+            .then(response => response.text())
+            .then(data => Download(data, 'graph.xml'));
     }
 
     render() {
@@ -68,6 +88,20 @@ class Home extends Component {
                                     Load Graph From Server
                                 </Button>
                             </div>
+                            <div className="menu-row" >
+                                <Button
+                                    isColor='info'
+                                    onClick={this.save}>
+                                    Save Graph
+                                </Button>
+                            </div>
+                            <div className="menu-row" >
+                                <Button
+                                    isColor='info'
+                                    onClick={this.download}>
+                                    Download XML
+                                </Button>
+                            </div>
 
                         </Box>
                     </Column>
@@ -90,7 +124,7 @@ class Home extends Component {
                                 <Box>
                                     <Columns>
                                         <Column>
-                                            Order: {this.state.order}
+                                            Order: {this.state.graph.getOrder()}
                                         </Column>
                                         <Column>
                                             In Degree: {this.state.graph.getInDegree({ vertex: this.state.vertexOnHover })}

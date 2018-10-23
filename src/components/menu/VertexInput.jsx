@@ -30,7 +30,6 @@ class VertexInput extends Component {
         this.props.handler(
             {
                 graph: this.props.graph,
-                order: this.props.graph.getOrder(),
                 disableEdge: false
             }
         );
