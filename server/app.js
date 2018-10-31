@@ -25,7 +25,7 @@ app.get('/read', (req, res, next) => {
                 Object.keys(result[graph].edge).forEach(edge => {
                     newj[result[graph].edge[edge].$.source].push(
                         Vertex(result[graph].edge[edge].$.target,
-                            0,
+                            result[graph].edge[edge].$.cost,
                             result[graph].edge[edge].$.id
                         )
                     );
