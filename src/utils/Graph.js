@@ -1,4 +1,5 @@
 import Vertex from './Vertex'
+
 class Graph {
 
     addVertex({ vertex }) {
@@ -7,7 +8,7 @@ class Graph {
         }
     }
 
-    addEdge({ start, end, cost, id}) {
+    addEdge({ start, end, cost, id }) {
         this[start].push(new Vertex(end, cost, id));
     }
 
@@ -18,16 +19,16 @@ class Graph {
     }
 
     delEdge({ start, end }) {
-        this[start] = this[start].filter(x => { console.log(x); return (x.name == end) ? false : true });
+        this[start] = this[start].filter(x => { console.log(x); return (x.name === end) ? false : true });
     }
 
     getInDegree({ vertex }) {
         if (vertex) {
             var count = 0;
             Object.keys(this).forEach((vx) => {
-                if (vx != vertex) {
+                if (vx !== vertex) {
                     this[vx].forEach(edge => {
-                        if (edge.name == vertex) {
+                        if (edge.name === vertex) {
                             count++;
                         }
                     })
@@ -53,7 +54,7 @@ class Graph {
         let contains = true;
         Object.keys(this).forEach((x) => {
             Object.keys(this).forEach((t) => {
-                if (t != x) {
+                if (t !== x) {
                     if (!this[x].map(d => d.name).includes(t)) {
                         contains = false;
                     }
@@ -67,10 +68,10 @@ class Graph {
         let degree = 0;
         let regular = true;
         Object.keys(this).forEach((vx, i) => {
-            if (i == 0) {
+            if (i === 0) {
                 degree = this.getOutDegree({ vertex: vx }) + this.getInDegree({ vertex: vx });
             } else {
-                if (degree != (this.getOutDegree({ vertex: vx }) + this.getInDegree({ vertex: vx }))) {
+                if (degree !== (this.getOutDegree({ vertex: vx }) + this.getInDegree({ vertex: vx }))) {
                     regular = false;
                 }
             }
@@ -79,9 +80,9 @@ class Graph {
     }
 
     isDirected() {
-        for(let key of Object.keys(this)) {
-            for(let edge of this[key]) {
-                if(this.readVertex(edge) != true){
+        for (let key of Object.keys(this)) {
+            for (let edge of this[key]) {
+                if (this.readVertex(edge) !== true) {
                     return false;
                 }
             }
@@ -90,8 +91,8 @@ class Graph {
     }
 
     readVertex(soughtEdge) {
-        for(let edge of this[soughtEdge.name] ) {
-            if(edge.id === soughtEdge.id){
+        for (let edge of this[soughtEdge.name]) {
+            if (edge.id === soughtEdge.id) {
                 return true;
             }
         };
