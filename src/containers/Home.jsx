@@ -8,12 +8,14 @@ import DeleteVertexInput from '../components/menu/DeleteVertexInput';
 import DeleteEdgeInput from '../components/menu/DeleteEdgeInput';
 import Upload from 'rc-upload';
 import Download from 'js-file-download';
+import Dijkstra from '../components/menu/DijkstraInput';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             graph: new Graph(),
+            dijkstraPath: [],
             success: false,
             disableEdge: true,
             vertexOnHover: ""
@@ -102,7 +104,7 @@ class Home extends Component {
                                     Download XML
                                 </Button>
                             </div>
-
+                            <Dijkstra handler={this.handler} graph={this.state.graph} />
                         </Box>
                     </Column>
                     <Column>
@@ -116,6 +118,8 @@ class Home extends Component {
 
                             {this.state.graph.isRegular() ?
                                 <Tag isColor="success">Regular</Tag> : ''}
+                            Dijkstra Path: {this.state.dijkstraPath
+                                .map(x => x.join(':')).join(' ')}
 
                             <RaphaelCanvas handler={this.handler} graph={this.state.graph} canvas={{ height: 600, width: 600, vertexRadius: 15 }} />
                         </Box>

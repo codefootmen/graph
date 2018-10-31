@@ -97,5 +97,47 @@ class Graph {
         };
         return false;
     }
+
+    dijkstra(start, end) {
+        if (!start || !end) {
+            return false;
+        }
+
+        let visited = [];
+        let unvisited = [];
+
+        Object.keys(this).forEach(x => {
+            (x !== start) ? unvisited = unvisited.concat([[x, Infinity]]) :
+                unvisited = unvisited.concat([[x, 0]])
+        });
+
+        let findCost = (list, vertex) => {
+            for (let pair of list) {
+                if (pair[0] === vertex) {
+                    return Number(pair[1]);
+                }
+            }
+        }
+
+        let updateCost = (list, vertex, cost) => {
+            list[list.findIndex(x => x[0] === vertex)][1] = cost;
+        }
+
+        while (unvisited.length > 0) {
+            console.log("hit");
+            unvisited.sort((a, b) => a[1] - b[1]);
+            if (unvisited[0][0] === end) {
+                visited.push(unvisited.shift());
+                return visited;
+            }
+            for (let neighbor of this[unvisited[0][0]]) {
+                if (Number(findCost(unvisited, neighbor.name)) > Number(neighbor.cost) + findCost(unvisited, unvisited[0][0])) {
+                    updateCost(unvisited, neighbor.name, Number(neighbor.cost) + findCost(unvisited, unvisited[0][0]));
+                }
+            }
+            visited.push(unvisited.shift());
+        }
+        return visited;
+    }
 }
 export default Graph;
