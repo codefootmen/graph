@@ -52,7 +52,7 @@ class EdgeInput extends Component {
                 id: 'E' + this.state.id
             })
         }
-        
+
         this.setState({ id: this.state.id + 1 });
         this.props.handler({
             graph: this.props.graph
@@ -81,7 +81,7 @@ class EdgeInput extends Component {
                             <input name="directed" type="checkbox" checked={this.state.directed} onChange={this.handleInputChange} />
                             <div className="slider round"></div>
                         </label>
-                        {this.state.directed ?
+                        {!this.state.directed ?
                             <Tag isColor="success">Directed</Tag> : <Tag isColor="danger">Undirected</Tag>}
                     </Label>
                     <Control className="edge-selects-wrapper">
@@ -90,7 +90,7 @@ class EdgeInput extends Component {
                     </Control>
                 </Field>
                 <Field>
-                    <Input onChange={this.handleChange} value={this.state.cost} style={{ maxWidth: 80 }} type="number" min={1} />
+                    <Input onChange={this.handleChange} style={{ maxWidth: 80 }} type="number" min="1" placeholder="Cost" />
                 </Field>
                 <Button isColor='info' onClick={this.handleSubmit} disabled={this.props.disableEdge}>Create</Button>
             </div>
