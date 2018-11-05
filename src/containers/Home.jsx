@@ -8,19 +8,25 @@ import DeleteVertexInput from '../components/menu/DeleteVertexInput';
 import DeleteEdgeInput from '../components/menu/DeleteEdgeInput';
 import Upload from 'rc-upload';
 import Download from 'js-file-download';
+import Dijkstra from '../components/menu/DijkstraInput';
+import Modal from '../components/modal';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             graph: new Graph(),
+            dijkstraPath: [],
             success: false,
             disableEdge: true,
-            vertexOnHover: ""
+            vertexOnHover: "",
+            modalIsActive: false,
+            modalMesage: "No message"
         }
         this.handler = this.handler.bind(this);
         this.read = this.read.bind(this);
         this.save = this.save.bind(this);
+        this.download = this.download.bind(this);
     }
 
     componentDidMount() {
@@ -53,18 +59,38 @@ class Home extends Component {
             },
             body: JSON.stringify(this.state.graph),
         })
-            .then(response => response.text());
+            .then(response => {
+                this.setState({
+                    modalIsActive: true,
+                    modalMessage: "Sucesso!"
+                });
+            }).catch(e => {
+                this.setState({
+                    modalIsActive: true,
+                    modalMessage: e.toString()
+                })
+            });
     }
 
     download() {
         fetch('http://localhost:5000/download')
             .then(response => response.text())
-            .then(data => Download(data, 'graph.xml'));
+            .then(data => Download(data, 'graph.xml'))
+            .catch(e => {
+                this.setState({
+                    modalIsActive: true,
+                    modalMessage: e.toString()
+                });
+            });
     }
 
     render() {
         return (
             <Container isFluid>
+                <Modal
+                    active={this.state.modalIsActive}
+                    message={this.state.modalMessage}
+                    close={() => { this.setState({ modalIsActive: false }) }} />
                 <Columns>
                     <Column isSize={4} >
                         <Title>Menu</Title>
@@ -102,7 +128,7 @@ class Home extends Component {
                                     Download XML
                                 </Button>
                             </div>
-
+                            <Dijkstra handler={this.handler} graph={this.state.graph} />
                         </Box>
                     </Column>
                     <Column>
@@ -116,6 +142,8 @@ class Home extends Component {
 
                             {this.state.graph.isRegular() ?
                                 <Tag isColor="success">Regular</Tag> : ''}
+                            Dijkstra Path: {this.state.dijkstraPath
+                                .map(x => x.join(':')).join(' ')}
 
                             <RaphaelCanvas handler={this.handler} graph={this.state.graph} canvas={{ height: 600, width: 600, vertexRadius: 15 }} />
                         </Box>

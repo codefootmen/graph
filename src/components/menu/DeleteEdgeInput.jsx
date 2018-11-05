@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Control, Input, Field, Label, Tag } from 'bloomer';
+import { Button, Control, Field, Label } from 'bloomer';
 import Select from './withSelectArray';
 
 class DeleteEdgeInput extends Component {

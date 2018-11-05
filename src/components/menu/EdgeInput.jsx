@@ -41,14 +41,19 @@ class EdgeInput extends Component {
             start: this.state.startVertex,
             end: this.state.endVertex,
             cost: this.state.cost,
-            id: 'E' + this.state.id});
+            id: 'E' + this.state.id
+        });
 
-        {this.state.directed ? "" : this.props.graph.addEdge({
+        if (this.state.directed) {
+            this.props.graph.addEdge({
                 start: this.state.endVertex,
                 end: this.state.startVertex,
                 cost: this.state.cost,
-                id: 'E' + this.state.id})}
-        this.setState({id: this.state.id + 1});
+                id: 'E' + this.state.id
+            })
+        }
+        
+        this.setState({ id: this.state.id + 1 });
         this.props.handler({
             graph: this.props.graph
         });
@@ -85,7 +90,7 @@ class EdgeInput extends Component {
                     </Control>
                 </Field>
                 <Field>
-                    <Input onChange={this.handleChange} value={this.state.cost} style={{ maxWidth: 80 }} type="number" min={0} />
+                    <Input onChange={this.handleChange} value={this.state.cost} style={{ maxWidth: 80 }} type="number" min={1} />
                 </Field>
                 <Button isColor='info' onClick={this.handleSubmit} disabled={this.props.disableEdge}>Create</Button>
             </div>
