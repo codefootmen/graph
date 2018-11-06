@@ -7,9 +7,9 @@ class EdgeInput extends Component {
         super(props);
         this.state = {
             edge: Array(0),
-            startVertex: "",
-            endVertex: "",
-            cost: 0,
+            startVertex: '',
+            endVertex: '',
+            cost: '',
             id: 1,
             directed: false
         }
@@ -53,7 +53,10 @@ class EdgeInput extends Component {
             })
         }
 
-        this.setState({ id: this.state.id + 1 });
+        this.setState({
+            id: this.state.id + 1,
+            cost: ''
+        });
         this.props.handler({
             graph: this.props.graph
         });
@@ -90,7 +93,7 @@ class EdgeInput extends Component {
                     </Control>
                 </Field>
                 <Field>
-                    <Input onChange={this.handleChange} style={{ maxWidth: 80 }} type="number" min="1" placeholder="Cost" />
+                    <Input onChange={this.handleChange} value={this.state.cost} style={{ maxWidth: 80 }} type="number" min="1" placeholder="Cost" />
                 </Field>
                 <Button isColor='info' onClick={this.handleSubmit} disabled={this.props.disableEdge}>Create</Button>
             </div>

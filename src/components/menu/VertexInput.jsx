@@ -29,6 +29,9 @@ class VertexInput extends Component {
                 disableEdge: false
             }
         );
+        this.setState({
+            vertex: ''
+        });
     }
 
     render() {
