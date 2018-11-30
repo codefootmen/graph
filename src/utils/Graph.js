@@ -140,5 +140,41 @@ class Graph {
         }
         return visited;
     }
+
+    kruskal() {
+        var MakeSet = require("union-find");
+
+        let vertices = this.vertex;
+        let edges = this.edge;
+        let metric = this.edge.cost;
+
+
+        let finalEdge = [];
+
+        let forest = new MakeSet(vertices.length);
+
+        let edgeDist = [];
+        for (let ind in edges) {
+            let u = edges[ind][0];
+            let v = edges[ind][1];
+            let e = { edge: edges[ind], weight: metric(vertices[u], vertices[v]) };
+            edgeDist.push(e);
+        }
+
+        edgeDist.sort(function (a, b) { return a.weight - b.weight; });
+
+        for (let i = 0; i < edgeDist.length; i++) {
+            let u = edgeDist[i].edge[0];
+            let v = edgeDist[i].edge[1];
+
+            if (forest.find(u) !== forest.find(v)) {
+                finalEdge.push([u, v]);
+                forest.link(u, v);
+            }
+        }
+
+        return finalEdge;
+
+    }
 }
 export default Graph;
