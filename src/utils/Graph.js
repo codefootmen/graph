@@ -140,5 +140,26 @@ class Graph {
         }
         return visited;
     }
+
+    depthSearch({ start, end }) {
+
+        let visited = [];
+
+        let search = (from, to, visited, g) => {
+            for (let neighbor of g[from]) {
+                if (!visited.includes(from)) {
+                    visited.push(from);
+                    if (neighbor === to) {
+                        return visited;
+                    }
+                    search(neighbor, to, visited, g);
+                } else {
+                    return false;
+                }
+            }
+            return visited;
+        }
+        search(start, end, visited, this);
+    }
 }
 export default Graph;
