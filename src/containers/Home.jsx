@@ -9,7 +9,7 @@ import DeleteEdgeInput from '../components/menu/DeleteEdgeInput';
 import Upload from 'rc-upload';
 import Download from 'js-file-download';
 import Dijkstra from '../components/menu/DijkstraInput';
-import DepthSearch from '../components/menu/DepthSearch';
+import DepthFirst from '../components/menu/DepthFirst';
 import Modal from '../components/modal';
 
 class Home extends Component {
@@ -18,6 +18,7 @@ class Home extends Component {
         this.state = {
             graph: new Graph(),
             dijkstraPath: [], 
+            depthFirst: [],
             success: false,
             disableEdge: true,
             vertexOnHover: "",
@@ -130,7 +131,7 @@ class Home extends Component {
                                 </Button>
                             </div>
                             <Dijkstra handler={this.handler} graph={this.state.graph} />
-                            <DepthSearch handler={this.handler} graph={this.state.graph} />
+                            <DepthFirst handler={this.handler} graph={this.state.graph} />
                         </Box>
                     </Column>
                     <Column>
@@ -146,6 +147,7 @@ class Home extends Component {
                                 <Tag isColor="success">Regular</Tag> : ''}
                             Dijkstra Path: {this.state.dijkstraPath
                                 .map(x => x.join(':')).join(' ')}
+                            Depth First: {this.state.depthFirst.join('-')}
 
                             <RaphaelCanvas handler={this.handler} graph={this.state.graph} canvas={{ height: 600, width: 600, vertexRadius: 15 }} />
                         </Box>
