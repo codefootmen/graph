@@ -142,24 +142,21 @@ class Graph {
     }
 
     depthSearch({ start, end }) {
-
         let visited = [];
-
-        let search = (from, to, visited, g) => {
-            for (let neighbor of g[from]) {
-                if (!visited.includes(from)) {
-                    visited.push(from);
-                    if (neighbor === to) {
-                        return visited;
+        let search = function (from, to, visited, g) {
+            visited.push(from);
+            if (from === to) {
+                return visited;
+            }
+            if (g[from] !== undefined) {
+                for (let neighbor of g[from]) {
+                    if (!visited.includes(neighbor.name)) {
+                        return search(neighbor.name, to, visited, g);
                     }
-                    search(neighbor, to, visited, g);
-                } else {
-                    return false;
                 }
             }
-            return visited;
         }
-        search(start, end, visited, this);
+        return search(start, end, visited, this);
     }
     kruskal() {
         var MakeSet = require("union-find");
