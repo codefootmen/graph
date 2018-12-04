@@ -11,13 +11,20 @@ class DepthSearch extends Component {
             end: ''
         }
 
-        this.handleChange = this.handleChange.bind(this);
+        this.handleStart = this.handleStart.bind(this);
+        this.handleEnd = this.handleEnd.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
+    handleStart(event) {
         this.setState({
-            vertex: event.target.value
+            start: event.target.value,
+        });
+    }
+
+    handleEnd(event) {
+        this.setState({
+            end: event.target.value,
         });
     }
 
@@ -34,7 +41,8 @@ class DepthSearch extends Component {
                     <Label>Depth Search
                     </Label>
                     <Control className="edge-selects-wrapper">
-                        <Select onChange={this.handleChange} options={this.props.graph} />
+                        <Select onChange={this.handleStart} options={this.props.graph} />
+                        <Select onChange={this.handleEnd} options={this.props.graph} />
                     </Control>
                 </Field>
                 <Button isColor='info' onClick={this.handleSubmit}>Find</Button>
