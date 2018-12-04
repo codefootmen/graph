@@ -161,5 +161,96 @@ class Graph {
         }
         search(start, end, visited, this);
     }
+    kruskal() {
+        var MakeSet = require("union-find");
+
+        let vertices = this.vertex;
+        let edges = this.edge;
+        let metric = this.edge.cost;
+
+
+        let finalEdge = [];
+
+        let forest = new MakeSet(vertices.length);
+
+        let edgeDist = [];
+        for (let ind in edges) {
+            let u = edges[ind][0];
+            let v = edges[ind][1];
+            let e = { edge: edges[ind], weight: metric(vertices[u], vertices[v]) };
+            edgeDist.push(e);
+        }
+
+        edgeDist.sort(function (a, b) { return a.weight - b.weight; });
+
+        for (let i = 0; i < edgeDist.length; i++) {
+            let u = edgeDist[i].edge[0];
+            let v = edgeDist[i].edge[1];
+
+            if (forest.find(u) !== forest.find(v)) {
+                finalEdge.push([u, v]);
+                forest.link(u, v);
+            }
+        }
+
+        return finalEdge;
+
+    }
+    prim() {
+        var DHeap = require('d-heap');
+        let edges = Object.edge;
+        let mst = [],
+            nodes = [],
+            queue,
+            edge, node, adjacent, v, u, w, vn, un, i, l;
+
+        for (i = 0, l = edges.length; i < l; ++i) {
+            edge = edges[i];
+            v = edge[0];
+            u = edge[1];
+            w = edge[2];
+
+            vn = nodes[v] ||
+                (nodes[v] = { v: v, w: Infinity, p: null, visited: false, adjacent: [] });
+            un = nodes[u] ||
+                (nodes[u] = { v: u, w: Infinity, p: null, visited: false, adjacent: [] });
+
+            vn.adjacent[u] = w;
+            un.adjacent[v] = w;
+        }
+
+        queue = new DHeap([nodes[edges[0][0]]], {
+            compare: function (a, b) {
+                return (b != null ? b.w : 0) - (a != null ? a.w : 0);
+            }
+        });
+
+        while (v = queue.pop()) {
+            v.visited = true;
+            adjacent = v.adjacent;
+
+            for (i = 0, l = adjacent.length; i < l; ++i) {
+                w = adjacent[i];
+                if (!w) continue;
+                u = nodes[i];
+
+                if (!u.visited && w < u.w) {
+                    u.w = w;
+                    u.p = v;
+                    queue.insert(u);
+                }
+            }
+        }
+
+        for (i = 0, l = nodes.length; i < l; ++i) {
+            node = nodes[i];
+
+            if (node.p) {
+                mst.push([node.v, node.p.v, node.w]);
+            }
+        }
+
+        return mst;
+    };
 }
 export default Graph;
