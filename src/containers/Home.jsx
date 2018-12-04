@@ -9,6 +9,7 @@ import DeleteEdgeInput from '../components/menu/DeleteEdgeInput';
 import Upload from 'rc-upload';
 import Download from 'js-file-download';
 import Dijkstra from '../components/menu/DijkstraInput';
+import DepthSearch from '../components/menu/DepthSearch';
 import Modal from '../components/modal';
 
 class Home extends Component {
@@ -16,7 +17,7 @@ class Home extends Component {
         super(props);
         this.state = {
             graph: new Graph(),
-            dijkstraPath: [],
+            dijkstraPath: [], 
             success: false,
             disableEdge: true,
             vertexOnHover: "",
@@ -129,6 +130,7 @@ class Home extends Component {
                                 </Button>
                             </div>
                             <Dijkstra handler={this.handler} graph={this.state.graph} />
+                            <DepthSearch handler={this.handler} graph={this.state.graph} />
                         </Box>
                     </Column>
                     <Column>
