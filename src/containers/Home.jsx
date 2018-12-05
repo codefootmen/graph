@@ -148,7 +148,7 @@ class Home extends Component {
                                 <Tag isColor="success">Regular</Tag> : ''}
                             Dijkstra Path: {this.state.dijkstraPath
                                 .map(x => x.join(':')).join(' ')}
-                            Depth First: {this.state.depthFirst.join('-')}
+                            Depth First: {this.state.depthFirst ? this.state.depthFirst.join('-') : "No"}
 
                             <RaphaelCanvas handler={this.handler} graph={this.state.graph} canvas={{ height: 600, width: 600, vertexRadius: 15 }} />
                         </Box>
