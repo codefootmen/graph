@@ -133,6 +133,7 @@ class Home extends Component {
                             </div>
                             <Dijkstra handler={this.handler} graph={this.state.graph} />
                             <DepthFirst handler={this.handler} graph={this.state.graph} />
+                            <Kruskal handler={this.handler} graph={this.state.graph} />
                         </Box>
                     </Column>
                     <Column>
@@ -146,13 +147,26 @@ class Home extends Component {
 
                             {this.state.graph.isRegular() ?
                                 <Tag isColor="success">Regular</Tag> : ''}
-                            Dijkstra Path: {this.state.dijkstraPath
-                                .map(x => x.join(':')).join(' ')}
-                            Depth First: {this.state.depthFirst ? this.state.depthFirst.join('-') : "No"}
+
 
                             <RaphaelCanvas handler={this.handler} graph={this.state.graph} canvas={{ height: 600, width: 600, vertexRadius: 15 }} />
                         </Box>
+
                         <Columns>
+                            <Column>
+                                <Box>
+                                    <div className="menu-row">
+                                        Dijkstra Path: {this.state.dijkstraPath
+                                            .map(x => x.join(':')).join(' ')}
+                                    </div>
+                                    <div className="menu-row">
+                                        Depth First: {this.state.depthFirst ? this.state.depthFirst.join('-') : "No"}
+                                    </div>
+                                    <div className="menu-row">
+                                        Kruskal: {this.state.kruskal ? this.state.kruskal.join('-') : "No"}
+                                    </div>
+                                </Box>
+                            </Column>
                             <Column>
                                 <Box>
                                     <Columns>
@@ -170,6 +184,7 @@ class Home extends Component {
                             </Column>
                         </Columns>
                     </Column>
+
                 </Columns>
             </Container>
         );
