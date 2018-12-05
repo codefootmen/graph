@@ -10,6 +10,7 @@ import Upload from 'rc-upload';
 import Download from 'js-file-download';
 import Dijkstra from '../components/menu/DijkstraInput';
 import DepthFirst from '../components/menu/DepthFirst';
+import BreadthFirst from '../components/menu/BreadthFirst'
 import Modal from '../components/modal';
 import Kruskal from '../components/menu/Kruskal';
 
@@ -20,6 +21,7 @@ class Home extends Component {
             graph: new Graph(),
             dijkstraPath: [],
             depthFirst: [],
+            breadthFirst:[],
             kruskal: [],
             success: false,
             disableEdge: true,
@@ -133,6 +135,7 @@ class Home extends Component {
                             </div>
                             <Dijkstra handler={this.handler} graph={this.state.graph} />
                             <DepthFirst handler={this.handler} graph={this.state.graph} />
+                            <BreadthFirst handler={this.handler} graph={this.state.graph} />
                         </Box>
                     </Column>
                     <Column>
