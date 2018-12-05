@@ -19,7 +19,7 @@ class Home extends Component {
         this.state = {
             graph: new Graph(),
             dijkstraPath: [],
-            depthSearch: [],
+            depthFirst: [],
             kruskal: [],
             success: false,
             disableEdge: true,
