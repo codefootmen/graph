@@ -160,6 +160,26 @@ class Graph {
         return search(start, end, visited, this);
     }
 
+    breadthFirst({ start }) {
+        let visited = [];
+        visited.push(start);
+        let list = [];
+        list.push(start);
+
+        while (list.length > 0) {
+            let i = list.shift();
+            if (i !== undefined) {
+                for (let neighbor of this[i]) {
+                    if (!visited.includes(neighbor.name)) {
+                        visited.push(neighbor.name);
+                        list.push(neighbor.name);
+                    }
+                }
+            }
+        }
+        console.log(visited);
+    }
+
     kruskal() {
         //-------------------------------//
 
