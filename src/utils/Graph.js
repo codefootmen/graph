@@ -158,96 +158,68 @@ class Graph {
         }
         return search(start, end, visited, this);
     }
+
     kruskal() {
-        var MakeSet = require("union-find");
+        //-------------------------------//
 
-        let vertices = this.vertex;
-        let edges = this.edge;
-        let metric = this.edge.cost;
+        let edges = [];
+        let chain = [];
 
-
-        let finalEdge = [];
-
-        let forest = new MakeSet(vertices.length);
-
-        let edgeDist = [];
-        for (let ind in edges) {
-            let u = edges[ind][0];
-            let v = edges[ind][1];
-            let e = { edge: edges[ind], weight: metric(vertices[u], vertices[v]) };
-            edgeDist.push(e);
+        let checkInArray = (x, y) => {
+            let go = false;
+            x.forEach(z => {
+                if ((z[0] === y[0] || z[0] === y[1]) && (z[1] === y[1] || z[1] === y[0])) {
+                    go = true;
+                }
+            })
+            return go;
         }
 
-        edgeDist.sort(function (a, b) { return a.weight - b.weight; });
+        Object.keys(this).forEach(x => {
+            edges = edges.concat(this[x].map(y => { return [x, y.name, y.cost] }));
+        });
 
-        for (let i = 0; i < edgeDist.length; i++) {
-            let u = edgeDist[i].edge[0];
-            let v = edgeDist[i].edge[1];
-
-            if (forest.find(u) !== forest.find(v)) {
-                finalEdge.push([u, v]);
-                forest.link(u, v);
-            }
-        }
-
-        return finalEdge;
-
-    }
-    prim() {
-        var DHeap = require('d-heap');
-        let edges = Object.edge;
-        let mst = [],
-            nodes = [],
-            queue,
-            edge, node, adjacent, v, u, w, vn, un, i, l;
-
-        for (i = 0, l = edges.length; i < l; ++i) {
-            edge = edges[i];
-            v = edge[0];
-            u = edge[1];
-            w = edge[2];
-
-            vn = nodes[v] ||
-                (nodes[v] = { v: v, w: Infinity, p: null, visited: false, adjacent: [] });
-            un = nodes[u] ||
-                (nodes[u] = { v: u, w: Infinity, p: null, visited: false, adjacent: [] });
-
-            vn.adjacent[u] = w;
-            un.adjacent[v] = w;
-        }
-
-        queue = new DHeap([nodes[edges[0][0]]], {
-            compare: function (a, b) {
-                return (b != null ? b.w : 0) - (a != null ? a.w : 0);
+        edges.forEach(x => {
+            if (!checkInArray(chain, x)) {
+                chain.push(x);
             }
         });
 
-        while (v = queue.pop()) {
-            v.visited = true;
-            adjacent = v.adjacent;
-
-            for (i = 0, l = adjacent.length; i < l; ++i) {
-                w = adjacent[i];
-                if (!w) continue;
-                u = nodes[i];
-
-                if (!u.visited && w < u.w) {
-                    u.w = w;
-                    u.p = v;
-                    queue.insert(u);
+        chain.sort(function (a, b) { return a[2] - b[2] })
+        let numberOfVertices = Object.keys(this).length;
+        let minimumTreeGenerator = [];
+        //---------------------------------//
+        let findVal = (c, curr) => {
+            let val;
+            c.forEach(x => {
+                if (x[0] === curr) {
+                    val = x[1];
                 }
-            }
+            });
+            return val;
         }
 
-        for (i = 0, l = nodes.length; i < l; ++i) {
-            node = nodes[i];
-
-            if (node.p) {
-                mst.push([node.v, node.p.v, node.w]);
-            }
+        let merge = (c, curr, uValue) => {
+            return c.map(x => {
+                if ((x[0] === curr)) {
+                    x[1] = uValue;
+                }
+                return x;
+            });
         }
 
-        return mst;
-    };
+        let components = Object.keys(this).map((x, i) => [x, i]);
+        while (minimumTreeGenerator.length < (numberOfVertices) && chain.length > 0) {
+            let currVertex = chain.shift();
+            let uValue = findVal(components, currVertex[0]);
+            let vValue = findVal(components, currVertex[1]);
+
+            if (uValue !== vValue) {
+                components = merge(components, currVertex[1], uValue);
+                minimumTreeGenerator = [...new Set([...minimumTreeGenerator, ...[currVertex[0], currVertex[1]]])]
+            }
+        }
+        return minimumTreeGenerator;
+    }
 }
 export default Graph;

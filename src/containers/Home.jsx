@@ -11,13 +11,16 @@ import Download from 'js-file-download';
 import Dijkstra from '../components/menu/DijkstraInput';
 import DepthSearch from '../components/menu/DepthSearch';
 import Modal from '../components/modal';
+import Kruskal from '../components/menu/Kruskal';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             graph: new Graph(),
-            dijkstraPath: [], 
+            dijkstraPath: [],
+            depthSearch: [],
+            kruskal: [],
             success: false,
             disableEdge: true,
             vertexOnHover: "",
@@ -31,7 +34,6 @@ class Home extends Component {
     }
 
     componentDidMount() {
-
         console.log(this.state.graph);
     }
 
@@ -131,6 +133,7 @@ class Home extends Component {
                             </div>
                             <Dijkstra handler={this.handler} graph={this.state.graph} />
                             <DepthSearch handler={this.handler} graph={this.state.graph} />
+                            <Kruskal handler={this.handler} graph={this.state.graph} />
                         </Box>
                     </Column>
                     <Column>
