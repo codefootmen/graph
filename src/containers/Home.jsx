@@ -175,6 +175,7 @@ class Home extends Component {
                             <Dijkstra handler={this.handler} graph={this.state.graph} />
                             <DepthFirst handler={this.handler} graph={this.state.graph} />
                             <Kruskal handler={this.handler} graph={this.state.graph} />
+                            <Prim handler={this.handler} graph={this.state.graph} />
                         </Box>
                         <Box>
                             <div className="menu-row">
@@ -186,6 +187,9 @@ class Home extends Component {
                             </div>
                             <div className="menu-row">
                                 Kruskal: {this.state.kruskal ? this.state.kruskal.join('-') : "No"}
+                            </div>
+                            <div className="menu-row">
+                                Prim: {this.state.prim ? this.state.prim.join('-') : "No"}
                             </div>
                         </Box>
                     </Column>
