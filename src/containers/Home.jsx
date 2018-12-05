@@ -10,7 +10,7 @@ import Upload from 'rc-upload';
 import Download from 'js-file-download';
 import Dijkstra from '../components/menu/DijkstraInput';
 import DepthFirst from '../components/menu/DepthFirst';
-import BreadthFirst from '../components/menu/BreadthFirst'
+import BreadthFirst from '../components/menu/BreadthFirst';
 import Modal from '../components/modal';
 import Kruskal from '../components/menu/Kruskal';
 import Prim from '../components/menu/Prim'
@@ -135,9 +135,6 @@ class Home extends Component {
                                     Download XML
                                 </Button>
                             </div>
-                            <Dijkstra handler={this.handler} graph={this.state.graph} />
-                            <DepthFirst handler={this.handler} graph={this.state.graph} />
-                            <BreadthFirst handler={this.handler} graph={this.state.graph} />
                         </Box>
                     </Column>
                     <Column>
@@ -179,6 +176,7 @@ class Home extends Component {
                         <Box>
                             <Dijkstra handler={this.handler} graph={this.state.graph} />
                             <DepthFirst handler={this.handler} graph={this.state.graph} />
+                            <BreadthFirst handler={this.handler} graph={this.state.graph} />
                             <Kruskal handler={this.handler} graph={this.state.graph} />
                             <Prim handler={this.handler} graph={this.state.graph} />
                         </Box>
@@ -189,6 +187,9 @@ class Home extends Component {
                             </div>
                             <div className="menu-row">
                                 Depth First: {this.state.depthFirst ? this.state.depthFirst.join('-') : "No"}
+                            </div>
+                            <div className="menu-row">
+                                Breadth First: {this.state.breadthFirst ? this.state.breadthFirst.join('-') : "No"}
                             </div>
                             <div className="menu-row">
                                 Kruskal: {this.state.kruskal ? this.state.kruskal.join('-') : "No"}
