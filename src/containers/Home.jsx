@@ -12,6 +12,7 @@ import Dijkstra from '../components/menu/DijkstraInput';
 import DepthFirst from '../components/menu/DepthFirst';
 import Modal from '../components/modal';
 import Kruskal from '../components/menu/Kruskal';
+import Prim from '../components/menu/Prim'
 
 class Home extends Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class Home extends Component {
             dijkstraPath: [],
             depthFirst: [],
             kruskal: [],
+            prim: [],
             success: false,
             disableEdge: true,
             vertexOnHover: "",
@@ -133,6 +135,8 @@ class Home extends Component {
                             </div>
                             <Dijkstra handler={this.handler} graph={this.state.graph} />
                             <DepthFirst handler={this.handler} graph={this.state.graph} />
+                            <Kruskal handler={this.handler} graph={this.state.graph} />
+                            <Prim handler={this.handler} graph={this.state.graph} />
                         </Box>
                     </Column>
                     <Column>

@@ -222,5 +222,32 @@ class Graph {
         }
         return minimumTreeGenerator;
     }
+
+    prim() {
+        let edgesMinimumTreeGenerator = [];
+        let vertices = Object.keys(this);
+        let verticesMinimumTreeGenerator = [vertices.shift()];
+
+        while (verticesMinimumTreeGenerator.length < Object.keys(this).length) {
+            let attemmpt = {};
+            attemmpt.cost = Infinity;
+
+            for (let vertex of verticesMinimumTreeGenerator) {
+                for (let neighbor of this[vertex]) {
+                    if (vertices.includes(neighbor.name)) {
+                        if (neighbor.cost < attemmpt.cost) {
+                            attemmpt.start = neighbor.name;
+                            attemmpt.end = vertex;
+                            attemmpt.cost = neighbor.cost;
+                        }
+                    }
+                }
+            }
+            vertices = vertices.filter(x => x !== attemmpt.start);
+            edgesMinimumTreeGenerator = [...new Set([...edgesMinimumTreeGenerator, ...[attemmpt.start, attemmpt.end]])];
+            verticesMinimumTreeGenerator.push(attemmpt.start);
+        }
+        return edgesMinimumTreeGenerator;
+    }
 }
 export default Graph;
