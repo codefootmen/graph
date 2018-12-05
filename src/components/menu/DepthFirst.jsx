@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Control, Field, Label } from 'bloomer';
 import Select from './withSelect';
 
-class DepthSearch extends Component {
+class DepthFirst extends Component {
     constructor(props) {
         super(props);
 
@@ -30,7 +30,7 @@ class DepthSearch extends Component {
 
     handleSubmit() {
         this.props.handler({
-            DepthSearch: this.props.graph.depthSearch(this.state.start, this.state.end)
+            depthFirst: this.props.graph.depthFirst({start: this.state.start, end: this.state.end})
         });
     }
 
@@ -38,7 +38,7 @@ class DepthSearch extends Component {
         return (
             <div className="menu-row">
                 <Field>
-                    <Label>Depth Search
+                    <Label>Depth First
                     </Label>
                     <Control className="edge-selects-wrapper">
                         <Select onChange={this.handleStart} options={this.props.graph} />
@@ -51,4 +51,4 @@ class DepthSearch extends Component {
     }
 }
 
-export default DepthSearch;
+export default DepthFirst;

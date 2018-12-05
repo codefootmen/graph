@@ -141,17 +141,18 @@ class Graph {
         return visited;
     }
 
-    depthSearch({ start, end }) {
+    depthFirst({ start, end }) {
         let visited = [];
-        let search = function (from, to, visited, g) {
-            visited.push(from);
-            if (from === to) {
+        let search = function (start, end, visited, g) {
+            visited.push(start);
+            if (start === end) {
+                console.log(visited);
                 return visited;
             }
-            if (g[from] !== undefined) {
-                for (let neighbor of g[from]) {
+            if (g[start] !== undefined) {
+                for (let neighbor of g[start]) {
                     if (!visited.includes(neighbor.name)) {
-                        return search(neighbor.name, to, visited, g);
+                        return search(neighbor.name, end, visited, g);
                     }
                 }
             }
