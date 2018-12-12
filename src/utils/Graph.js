@@ -143,16 +143,16 @@ class Graph {
 
     depthFirst({ start, end }) {
         let visited = [];
-        let search = function (start, end, visited, g) {
-            visited.push(start);
-            if (start === end) {
+        let search = function (from, to, visited, g) {
+            visited.push(from);
+            if (from === to) {
                 console.log(visited);
                 return visited;
             }
-            if (g[start] !== undefined) {
-                for (let neighbor of g[start]) {
+            if (g[from] !== undefined) {
+                for (let neighbor of g[from]) {
                     if (!visited.includes(neighbor.name)) {
-                        return search(neighbor.name, end, visited, g);
+                        return search(neighbor.name, to, visited, g);
                     }
                 }
             }
@@ -160,7 +160,7 @@ class Graph {
         return search(start, end, visited, this);
     }
 
-    breadthFirst({ start }) {
+    breadthFirst({ start , end}) {
         let visited = [];
         visited.push(start);
         let list = [];
@@ -168,17 +168,20 @@ class Graph {
 
         while (list.length > 0) {
             let i = list.shift();
-            if (i !== undefined) {
+                
                 for (let neighbor of this[i]) {
                     if (!visited.includes(neighbor.name)) {
                         visited.push(neighbor.name);
+                        if(end === neighbor.name){
+                            return visited;
+                        }
                         list.push(neighbor.name);
+                        
                     }
                 }
+            
             }
-        }
-        console.log(visited);
-        return visited;
+        
     }
 
     kruskal() {

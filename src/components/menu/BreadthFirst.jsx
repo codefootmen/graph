@@ -7,16 +7,24 @@ class BreadthFirst extends Component {
         super(props);
 
         this.state = {
-            start: ''
+            start: '',
+            end: ''
         }
 
         this.handleStart = this.handleStart.bind(this);
+        this.handleEnd = this.handleEnd.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleStart(event) {
         this.setState({
             start: event.target.value,
+        });
+    }
+
+    handleEnd(event){
+        this.setState({
+            end:event.target.value,
         });
     }
 
@@ -34,6 +42,7 @@ class BreadthFirst extends Component {
                     </Label>
                     <Control className="edge-selects-wrapper">
                         <Select onChange={this.handleStart} options={this.props.graph} />
+                        <Select onChange={this.handleEnd} options={this.props.graph} />
                     </Control>
                 </Field>
                 <Button isColor='info' onClick={this.handleSubmit}>Find</Button>
