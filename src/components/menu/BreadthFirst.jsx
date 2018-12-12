@@ -30,7 +30,7 @@ class BreadthFirst extends Component {
 
     handleSubmit() {
         this.props.handler({
-            breadthFirst: this.props.graph.breadthFirst({start: this.state.start})
+            breadthFirst: this.props.graph.breadthFirst({start: this.state.start, end: this.state.end})
         });
     }
 
