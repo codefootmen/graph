@@ -14,6 +14,7 @@ import BreadthFirst from '../components/menu/BreadthFirst';
 import Modal from '../components/modal';
 import Kruskal from '../components/menu/Kruskal';
 import Prim from '../components/menu/Prim'
+import Malgrange from '../components/menu/Malgrange';
 
 class Home extends Component {
     constructor(props) {
@@ -22,9 +23,10 @@ class Home extends Component {
             graph: new Graph(),
             dijkstraPath: [],
             depthFirst: [],
-            breadthFirst:[],
+            breadthFirst: [],
             kruskal: [],
             prim: [],
+            malgrange: [],
             success: false,
             disableEdge: true,
             vertexOnHover: "",
@@ -179,6 +181,7 @@ class Home extends Component {
                             <BreadthFirst handler={this.handler} graph={this.state.graph} />
                             <Kruskal handler={this.handler} graph={this.state.graph} />
                             <Prim handler={this.handler} graph={this.state.graph} />
+                            <Malgrange handler={this.handler} graph={this.state.graph} />
                         </Box>
                         <Box>
                             <div className="menu-row">
@@ -196,6 +199,9 @@ class Home extends Component {
                             </div>
                             <div className="menu-row">
                                 Prim: {this.state.prim ? this.state.prim.join('-') : "No"}
+                            </div>
+                            <div className="menu-row">
+                                Malgrange: {this.state.malgrange ? this.state.malgrange.join('-') : "No"}
                             </div>
                         </Box>
                     </Column>

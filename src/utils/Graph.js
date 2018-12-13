@@ -160,7 +160,7 @@ class Graph {
         return search(start, end, visited, this);
     }
 
-    breadthFirst({ start , end}) {
+    breadthFirst({ start, end }) {
         let visited = [];
         visited.push(start);
         let list = [];
@@ -168,20 +168,20 @@ class Graph {
 
         while (list.length > 0) {
             let i = list.shift();
-                
-                for (let neighbor of this[i]) {
-                    if (!visited.includes(neighbor.name)) {
-                        visited.push(neighbor.name);
-                        if(end === neighbor.name){
-                            return visited;
-                        }
-                        list.push(neighbor.name);
-                        
+
+            for (let neighbor of this[i]) {
+                if (!visited.includes(neighbor.name)) {
+                    visited.push(neighbor.name);
+                    if (end === neighbor.name) {
+                        return visited;
                     }
+                    list.push(neighbor.name);
+
                 }
-            
             }
-        
+
+        }
+
     }
 
     kruskal() {
@@ -273,5 +273,60 @@ class Graph {
         }
         return edgesMinimumTreeGenerator;
     }
+
+    transitiveClosure({ vertex }) {
+        let visited = [];
+
+        let search = function (from, visited, g) {
+            visited.push(from);
+            if (g[from] !== undefined && g[from].length > 0) {
+                for (let neighbor of g[from]) {
+                    if (!visited.includes(neighbor.name)) {
+                        search(neighbor.name, visited, g);
+                    }
+                }
+            }
+        }
+        search(vertex, visited, this);
+
+        return visited;
+    }
+
+    inverseTransitiveClosure({ vertex }) {
+        let visited = [];
+
+        let has = (x, y) => {
+            let response = false;
+            x.forEach(z => {
+                if (z.name === y) {
+                    response = true;
+                }
+            });
+            return response;
+        };
+
+        let search = function (current, visited, g) {
+            visited.push(current);
+            for (let gVertex of Object.keys(g)) {
+                if (has(g[gVertex], current)) {
+                    if (!visited.includes(gVertex)) {
+                        search(gVertex, visited, g);
+                    }
+                }
+            }
+        }
+        search(vertex, visited, this);
+
+        return visited;
+    }
+
+    malgrange({ vertex }) {
+        let tC = this.transitiveClosure({ "vertex": vertex });
+        let iTC = this.inverseTransitiveClosure({ "vertex": vertex });
+        let intersection = tC.filter(n => { return iTC.indexOf(n) !== -1 });
+
+        return intersection;
+    }
 }
+
 export default Graph;
