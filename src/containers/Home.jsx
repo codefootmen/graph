@@ -8,23 +8,38 @@ import DeleteVertexInput from '../components/menu/DeleteVertexInput';
 import DeleteEdgeInput from '../components/menu/DeleteEdgeInput';
 import Upload from 'rc-upload';
 import Download from 'js-file-download';
+import Dijkstra from '../components/menu/DijkstraInput';
+import DepthFirst from '../components/menu/DepthFirst';
+import BreadthFirst from '../components/menu/BreadthFirst';
+import Modal from '../components/modal';
+import Kruskal from '../components/menu/Kruskal';
+import Prim from '../components/menu/Prim'
+import Malgrange from '../components/menu/Malgrange';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             graph: new Graph(),
+            dijkstraPath: [],
+            depthFirst: [],
+            breadthFirst: [],
+            kruskal: [],
+            prim: [],
+            malgrange: [],
             success: false,
             disableEdge: true,
-            vertexOnHover: ""
+            vertexOnHover: "",
+            modalIsActive: false,
+            modalMesage: "No message"
         }
         this.handler = this.handler.bind(this);
         this.read = this.read.bind(this);
         this.save = this.save.bind(this);
+        this.download = this.download.bind(this);
     }
 
     componentDidMount() {
-
         console.log(this.state.graph);
     }
 
@@ -53,18 +68,38 @@ class Home extends Component {
             },
             body: JSON.stringify(this.state.graph),
         })
-            .then(response => response.text());
+            .then(response => {
+                this.setState({
+                    modalIsActive: true,
+                    modalMessage: "Sucesso!"
+                });
+            }).catch(e => {
+                this.setState({
+                    modalIsActive: true,
+                    modalMessage: e.toString()
+                })
+            });
     }
 
     download() {
         fetch('http://localhost:5000/download')
             .then(response => response.text())
-            .then(data => Download(data, 'graph.xml'));
+            .then(data => Download(data, 'graph.xml'))
+            .catch(e => {
+                this.setState({
+                    modalIsActive: true,
+                    modalMessage: e.toString()
+                });
+            });
     }
 
     render() {
         return (
             <Container isFluid>
+                <Modal
+                    active={this.state.modalIsActive}
+                    message={this.state.modalMessage}
+                    close={() => { this.setState({ modalIsActive: false }) }} />
                 <Columns>
                     <Column isSize={4} >
                         <Title>Menu</Title>
@@ -102,7 +137,6 @@ class Home extends Component {
                                     Download XML
                                 </Button>
                             </div>
-
                         </Box>
                     </Column>
                     <Column>
@@ -117,8 +151,10 @@ class Home extends Component {
                             {this.state.graph.isRegular() ?
                                 <Tag isColor="success">Regular</Tag> : ''}
 
+
                             <RaphaelCanvas handler={this.handler} graph={this.state.graph} canvas={{ height: 600, width: 600, vertexRadius: 15 }} />
                         </Box>
+
                         <Columns>
                             <Column>
                                 <Box>
@@ -136,6 +172,38 @@ class Home extends Component {
                                 </Box>
                             </Column>
                         </Columns>
+                    </Column>
+                    <Column>
+                        <Title>Algorithms</Title>
+                        <Box>
+                            <Dijkstra handler={this.handler} graph={this.state.graph} />
+                            <DepthFirst handler={this.handler} graph={this.state.graph} />
+                            <BreadthFirst handler={this.handler} graph={this.state.graph} />
+                            <Kruskal handler={this.handler} graph={this.state.graph} />
+                            <Prim handler={this.handler} graph={this.state.graph} />
+                            <Malgrange handler={this.handler} graph={this.state.graph} />
+                        </Box>
+                        <Box>
+                            <div className="menu-row">
+                                Dijkstra Path: {this.state.dijkstraPath
+                                    .map(x => x.join(':')).join(' ')}
+                            </div>
+                            <div className="menu-row">
+                                Depth First: {this.state.depthFirst ? this.state.depthFirst.join('-') : "No"}
+                            </div>
+                            <div className="menu-row">
+                                Breadth First: {this.state.breadthFirst ? this.state.breadthFirst.join('-') : "No"}
+                            </div>
+                            <div className="menu-row">
+                                Kruskal: {this.state.kruskal ? this.state.kruskal.join('-') : "No"}
+                            </div>
+                            <div className="menu-row">
+                                Prim: {this.state.prim ? this.state.prim.join('-') : "No"}
+                            </div>
+                            <div className="menu-row">
+                                Malgrange: {this.state.malgrange ? this.state.malgrange.join('-') : "No"}
+                            </div>
+                        </Box>
                     </Column>
                 </Columns>
             </Container>

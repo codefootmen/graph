@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Raphael, Paper, Set, Circle, Ellipse, Image, Rect, Text, Path, Line } from 'react-raphael';
+import { Paper, Set, Circle, Text, Line } from 'react-raphael';
 import math from 'mathjs';
 
 class RaphaelCanvas extends Component {
@@ -57,7 +57,7 @@ class RaphaelCanvas extends Component {
         return (
             <Paper width={this.props.canvas.height} height={this.props.canvas.height} >
                 <Set>
-                    {JSON.stringify(this.props.graph)}
+                    {/* {JSON.stringify(this.props.graph)} */}
 
                     {Object.keys(this.props.graph).map((value, i) => {
 
@@ -80,13 +80,13 @@ class RaphaelCanvas extends Component {
                     })}
 
                     {Object.keys(this.props.graph).map((start, i) => {
-                        this.props.graph[start].forEach((end) => {
+                        return this.props.graph[start].forEach((end) => {
                             lines.push(<Line
                                 key={end.id}
-                                x1={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex == start)[0])].props.x}
-                                y1={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex == start)[0])].props.y}
-                                x2={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex == end.name)[0])].props.x}
-                                y2={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex == end.name)[0])].props.y}
+                                x1={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex === start)[0])].props.x}
+                                y1={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex === start)[0])].props.y}
+                                x2={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex === end.name)[0])].props.x}
+                                y2={vertices[vertices.indexOf(vertices.filter(x => x.props.data.vertex === end.name)[0])].props.y}
                                 attr={{ 'arrow-end': 'open-wide-long', "stroke-width": 1.5 }}
                             />);
                         });

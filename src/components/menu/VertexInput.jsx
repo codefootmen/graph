@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Control, Input, Field, Label, Tag } from 'bloomer';
-import { Radio } from 'bloomer/lib/elements/Form/Radio';
-import { Checkbox } from 'bloomer/lib/elements/Form/Checkbox';
 
 class VertexInput extends Component {
     constructor(props) {
@@ -14,8 +12,6 @@ class VertexInput extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-
 
     handleChange(event) {
         this.setState({
@@ -33,6 +29,9 @@ class VertexInput extends Component {
                 disableEdge: false
             }
         );
+        this.setState({
+            vertex: ''
+        });
     }
 
     render() {
